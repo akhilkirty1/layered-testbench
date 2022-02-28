@@ -27,11 +27,13 @@ interface wb_if       #(
 
 // ****************************************************************************              
    task reset_bus();
+
         cyc_o <= 1'b0;
         stb_o <= 1'b0;
         we_o <= 1'b0;
         adr_o <= 'b0;
         dat_o <= 'b0;
+
    endtask
 
 // ****************************************************************************              
@@ -40,62 +42,63 @@ interface wb_if       #(
                    input bit [DATA_WIDTH-1:0]  data
                    );  
 
-        @(posedge clk_i);
-        adr_o <= addr;
-        dat_o <= data;
-        cyc_o <= 1'b1;
-        stb_o <= 1'b1;
-        we_o <= 1'b1;
-        while (!ack_i) @(posedge clk_i);
-        cyc_o <= 1'b0;
-        stb_o <= 1'b0;
-        adr_o <= 'bx;
-        dat_o <= 'bx;
-        we_o <= 1'b0;
-        @(posedge clk_i);
+    @(posedge clk_i);
+    adr_o <= addr;
+    dat_o <= data;
+    cyc_o <= 1'b1;
+    stb_o <= 1'b1;
+    we_o <= 1'b1;
+    while (!ack_i) @(posedge clk_i);
+    cyc_o <= 1'b0;
+    stb_o <= 1'b0;
+    adr_o <= 'bx;
+    dat_o <= 'bx;
+    we_o <= 1'b0;
+    @(posedge clk_i);
 
-endtask        
+  endtask        
 
-// ****************************************************************************              
-task master_read(
+  // ****************************************************************************              
+  task master_read(
                  input bit [ADDR_WIDTH-1:0]  addr,
                  output bit [DATA_WIDTH-1:0] data
                  );                                                  
 
-        @(posedge clk_i);
-        adr_o <= addr;
-        dat_o <= 'bx;
-        cyc_o <= 1'b1;
-        stb_o <= 1'b1;
-        we_o <= 1'b0;
-        @(posedge clk_i);
-        while (!ack_i) @(posedge clk_i);
-        cyc_o <= 1'b0;
-        stb_o <= 1'b0;
-        adr_o <= 'bx;
-        dat_o <= 'bx;
-        we_o <= 1'b0;
-        data = dat_i;
+    @(posedge clk_i);
+    adr_o <= addr;
+    dat_o <= 'bx;
+    cyc_o <= 1'b1;
+    stb_o <= 1'b1;
+    we_o <= 1'b0;
+    @(posedge clk_i);
+    while (!ack_i) @(posedge clk_i);
+    cyc_o <= 1'b0;
+    stb_o <= 1'b0;
+    adr_o <= 'bx;
+    dat_o <= 'bx;
+    we_o <= 1'b0;
+    data = dat_i;
 
-endtask        
+  endtask        
 
-// ****************************************************************************              
-     task master_monitor(
+  // ****************************************************************************              
+  task master_monitor(
                    output bit [ADDR_WIDTH-1:0] addr,
                    output bit [DATA_WIDTH-1:0] data,
                    output bit we                    
                   );
                          
-          while (!cyc_o) @(posedge clk_i);                                                  
-          while (!ack_i) @(posedge clk_i);
-          addr = adr_o;
-          we = we_o;
-          if (we_o) begin
-            data = dat_o;
-          end else begin
-            data = dat_i;
-          end
-          while (cyc_o) @(posedge clk_i);                                                  
-     endtask 
+    while (!cyc_o) @(posedge clk_i);                                                  
+    while (!ack_i) @(posedge clk_i);
+    addr = adr_o;
+    we = we_o;
+    if (we_o) begin
+      data = dat_o;
+    end else begin
+      data = dat_i;
+    end
+    while (cyc_o) @(posedge clk_i);                                                  
+
+  endtask 
 
 endinterface
