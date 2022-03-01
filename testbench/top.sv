@@ -64,14 +64,14 @@ module top();
      bit [WB_DATA_WIDTH-1:0] i2c_mon_data[];
      
      // Wait 1000ns for things to cool down
-     #1000
+     #2000
      
      // Start Monitoring
      forever begin
         i2c_bus.monitor(i2c_mon_addr, i2c_mon_op, i2c_mon_data);
         case (i2c_mon_op)
-          READ: $display("I2C_BUS READ \tTransfer: %d", i2c_mon_data[0]);
-          WRITE: $display("I2C_BUS WRITE \tTransfer: %d", i2c_mon_data[0]);
+          READ:  $display("I2C_BUS READ  Transfer: %d", i2c_mon_data[0]);
+          WRITE: $display("I2C_BUS WRITE Transfer: %d", i2c_mon_data[0]);
         endcase
      end
   end
@@ -90,16 +90,13 @@ module top();
      // Wait 1000ns
      #1000
      
-     // Perform Lab 1
      iicmb_enable();
-     //iicmb_write(8'h05, 8'h22, 8'h78);   // iicmb_write(bus_id, slave_addr, write_data)
-     
-     //*******************************************************************************        
+
      // Wait 1000ns
      #1000
 
      // Start i2c slave
-     fork forever i2c_bus.wait_for_i2c_transfer(); join_none
+     fork i2c_slave_start(); join_none
 
      // Write 32 incrementing values, from 0 to 31, to the i2c_bus
      for (bit [I2C_DATA_WIDTH-1:0] data = 0; data < 32; data++)
@@ -124,6 +121,47 @@ module top();
      
      $finish;
   end
+
+  // starts the i2c slave
+  task i2c_slave_start();
+   forever begin
+     fork 
+        // handle the stop command
+        begin : handle_stop_command
+          forever @(posedge sda) if (scl) break;
+        end
+
+        // handle read and write operations
+        begin : handle_operations
+          // wires required to call wait_for_i2c_transfer 
+          i2c_op_t op;
+          bit [I2C_DATA_WIDTH-1:0] write_data[];
+          
+          // wires required to call provide_read_data 
+          static bit transfer_complete = 0;
+          static bit [I2C_DATA_WIDTH-1:0] read_data[];
+
+          // wait and capture an i2c transfer
+          i2c_bus.wait_for_i2c_transfer(op, write_data); 
+         
+          // generate read data 
+          read_data = i2c_bus.generate_read_data();
+
+          // process read data
+          i2c_bus.provide_read_data(read_data, transfer_complete);
+
+          // handle transfer failure
+          if (!transfer_complete) begin
+            $display("Slave failed to send read data");
+            $finish;
+          end
+
+        end
+     join_any
+     disable fork;
+   end
+  endtask
+
   
   task iicmb_enable();
      // Write byte "1xxxxxxx" to the CSR register 
@@ -139,9 +177,6 @@ module top();
 
     logic [7:0] tmp_data;
      
-     // $display("I2CMMB: Writing %d to 0x%h on %h", 
-     //   write_data, slave_addr, bus_id);
- 
      //*****************************************************************
      // SELECT BUS
      //*****************************************************************
@@ -215,9 +250,6 @@ module top();
 
     logic [7:0] tmp_data;
      
-     // $display("I2CMMB: Reading from 0x%h on 0x%h", 
-     //   slave_addr, bus_id);
-  
      //*****************************************************************
      // SELECT BUS
      //*****************************************************************
@@ -280,8 +312,6 @@ module top();
      
      // Wait for interrupt or until DON bit of CMDR reads '1'
      wait(irq); wb_bus.master_read(CMDR, tmp_data);
-
-     $display("Successful Read: %d", read_data);
 
   endtask
   
