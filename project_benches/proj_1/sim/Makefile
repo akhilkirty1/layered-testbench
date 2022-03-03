@@ -1,7 +1,7 @@
-export ECE745_PROJECT_HOME ?= $(PWD)/..
+export ECE745_PROJECT_HOME ?= $(PWD)/../../..
 
-include $(ECE745_PROJECT_HOME)/interface_packages/wb_pkg/Makefile
-include $(ECE745_PROJECT_HOME)/interface_packages/i2c_pkg/Makefile
+include $(ECE745_PROJECT_HOME)/verification_ip/interface_packages/wb_pkg/Makefile
+include $(ECE745_PROJECT_HOME)/verification_ip/interface_packages/i2c_pkg/Makefile
 
 clean: 
 	rm -rf work *.wlf transcript
