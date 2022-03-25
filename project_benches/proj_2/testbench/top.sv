@@ -87,9 +87,10 @@ module top();
   initial begin : test_flow
 
      // Place virtual interface handles into ncsu_config_db
+     ncsu_config_db()
 
      // Construct the test class
-     i2cmb_test i2cmb_test_inst = new; 
+     i2cmb_test i2cmb_test_inst = new("i2cmb_test_inst"); 
      
      // Execute the run task of the test after reset is released
      @(negedge reset)         // Wait until reset is over
@@ -131,7 +132,7 @@ module top();
        // increment write data from 64 to 127
        iicmb_write(0, 0, 64 + i);     // iicmb_write(bus_id, slave_addr, write_data)
        // decrement read data from 63 to 0
-       iicmb_read(0, 0, read_data);   // iicmb_write(bus_id, slave_addr, write_data)
+       iicmb_read(0, 0, read_data);   // iicmb_write(bus_id, slave_addr, read_data)
      end
      
      $finish;

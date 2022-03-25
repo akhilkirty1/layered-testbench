@@ -14,20 +14,24 @@ class i2c_monitor extends ncsu_component#(.T(i2c_transaction));
    endfunction
 
    virtual task run ();
+      // Doesn't Exist
       bus.wait_for_reset();
+
       forever begin
+
+         // Read Transaction
          monitored_trans = new("monitored_trans");
-         bus.monitor(monitored_trans.header,
-                     monitored_trans.payload,
-                     monitored_trans.trailer,
-                     monitored_trans.delay
-                     )
-         ncsu_info("abc_monitor::run()", $sformatf("%s: header 0x%x payload
+         bus.monitor(monitored_trans.slave_addr,
+                     monitored_trans.trans_mode,
+                     monitored_trans.trans_data);
+
+         // Display Transaction
+         ncsu_info("abc_monitor::run()", 
+            $sformatf("%s: Slave Address: 0x%x\nOperation: %x\nData: 0x%x"
                   get_full_name(),
-                  monitored_trans.header,
-                  monitored_trans.payload,
-                  monitored_trans.trailer,
-                  monitored_trans.delay), NCSU_MEDIUM);
+                  monitored_trans.slave_addr,
+                  monitored_trans.trans_mode,
+                  monitored_trans.trans_data), NCSU_MEDIUM);
          parent.nb_put(monitored_trans);
       end
    endtask
