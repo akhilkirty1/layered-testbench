@@ -1,6 +1,9 @@
 `timescale 1ns / 10ps
 
+import ncsu_pkg::*;
+import i2cmb_env_pkg::*;
 import i2c_pkg::*;
+import wb_pkg::*;
 
 module top();
   
@@ -28,7 +31,7 @@ module top();
   // Clock generator
   initial begin : clk_gen
       clk = 1'b0;
-      forever #5 clk = ~clk;
+      forever #5ns clk <= ~clk;
   end
   
   // Reset generator
@@ -36,108 +39,36 @@ module top();
      rst = 1'b1;
      #113 rst = ~rst;
   end
- 
-  // Monitor Wishbone bus and display transfers in the transcript
-  initial begin : wb_monitoring
 
-     // Setup variables to store returned data
-     bit [WB_ADDR_WIDTH-1:0] wb_mon_addr;
-     bit [WB_DATA_WIDTH-1:0] wb_mon_data;
-     bit wb_mon_we;
-     
-     // Wait 1000ns for things to cool down
-     #1000
-     
-     // Start Monitoring
-     forever begin
-        wb_bus.master_monitor(wb_mon_addr, wb_mon_data, wb_mon_we);
-        // $display("WB PACKET: we=%b addr=0x%h data=0x%h", 
-        //   wb_mon_we, wb_mon_addr, wb_mon_data);
-     end
-  end
-  
-  initial begin : i2c_monitoring
-
-     // Setup variables to store returned data
-     bit [WB_ADDR_WIDTH-1:0] i2c_mon_addr;
-     i2c_op_t                i2c_mon_op;
-     bit [WB_DATA_WIDTH-1:0] i2c_mon_data[];
-     
-     // Wait 1000ns for things to cool down
-     #2000
-     
-     // Start Monitoring
-     forever begin
-        i2c_bus.monitor(i2c_mon_addr, i2c_mon_op, i2c_mon_data);
-        case (i2c_mon_op)
-          READ:  $display("I2C_BUS READ  Transfer: %d", i2c_mon_data[0]);
-          WRITE: $display("I2C_BUS WRITE Transfer: %d", i2c_mon_data[0]);
-        endcase
-     end
-  end
-  
   enum bit[1:0] {
       CSR  = 2'b00, 
       DPR  = 2'b01, 
       CMDR = 2'b10, 
       FSMR = 2'b11
   } Registers;
+
+  i2cmb_test tst;
    
   // Define the flow of the simulation
   initial begin : test_flow
 
      // Place virtual interface handles into ncsu_config_db
-     ncsu_config_db()
+     ncsu_config_db#(virtual wb_if)::set("tst.env.p0_agent", p0_bus);
+     ncsu_config_db#(virtual i2c_if)::set("tst.env.p1_agent", p1_bus);
+     p0_bus.enable_driver = 1'b1;
 
      // Construct the test class
-     i2cmb_test i2cmb_test_inst = new("i2cmb_test_inst"); 
+     tst = new("tst", null);
      
      // Execute the run task of the test after reset is released
-     @(negedge reset)         // Wait until reset is over
-     #1000                    // Wait 1000ns
-     i2cmb_test_inst.run();   // Run the test
-     
+     wait (rst == 1);         // Wait until reset is over
+     tst.run();               // Run the test
+
      // Execute $finish after test complete
-     $finish;
+     #100 $finish();
 
-     //////////// OLD TEST FLOW //////////////
-     static bit [I2C_DATA_WIDTH-1:0] read_data = 0;
-  
-     // Wait 1000ns
-     #1000
-     
-     iicmb_enable();
-
-     // Wait 1000ns
-     #1000
-
-     // Start i2c slave
-     fork i2c_slave_start(); join_none
-
-     // Write 32 incrementing values, from 0 to 31, to the i2c_bus
-     for (bit [I2C_DATA_WIDTH-1:0] data = 0; data < 32; data++)
-       iicmb_write(0, 0, {data});
-     
-     // Wait 1000ns
-     #1000
-  
-     // Read 32 values from the i2c_bus (return incrementing data from 100 to 131)
-     repeat(32) iicmb_read(0, 0, read_data);
-  
-     // Wait 1000ns
-     #1000
-
-     // Alternate writes and reads for 64 transfers 
-     for (integer i = 0; i < 64; i++) begin
-       // increment write data from 64 to 127
-       iicmb_write(0, 0, 64 + i);     // iicmb_write(bus_id, slave_addr, write_data)
-       // decrement read data from 63 to 0
-       iicmb_read(0, 0, read_data);   // iicmb_write(bus_id, slave_addr, read_data)
-     end
-     
-     $finish;
   end
-
+     
   // starts the i2c slave
   task i2c_slave_start();
    forever begin
@@ -333,10 +264,10 @@ module top();
   
   // Instantiate the Wishbone master Bus Functional Model
   wb_if #(
-        .ADDR_WIDTH(WB_ADDR_WIDTH),
-        .DATA_WIDTH(WB_DATA_WIDTH)
-        )
-  wb_bus (
+          .ADDR_WIDTH(WB_ADDR_WIDTH),
+          .DATA_WIDTH(WB_DATA_WIDTH)
+          )
+  p0_bus (
     // System sigals
     .clk_i(clk),
     .rst_i(rst),
@@ -352,7 +283,7 @@ module top();
     .ack_o(),
     .adr_i(),
     .we_i(),
-    // Shred signals
+    // Shared signals
     .dat_o(dat_wr_o),
     .dat_i(dat_rd_i)
     );
@@ -360,14 +291,11 @@ module top();
   
   // Instantiate the I2C Interface
   i2c_if #(
-        .NUM_BUSSES(NUM_I2C_BUSSES),
-        .ADDR_WIDTH(I2C_ADDR_WIDTH),
-        .DATA_WIDTH(I2C_DATA_WIDTH)
-        )
-  i2c_bus (
-    .scl(scl[0]),  // I2C Clock
-    .sda(sda[0])   // I2C Data
-    );
+           .NUM_BUSSES(NUM_I2C_BUSSES),
+           .ADDR_WIDTH(I2C_ADDR_WIDTH),
+           .DATA_WIDTH(I2C_DATA_WIDTH)
+           )
+  p1_bus(.scl(scl[0]), .sda(sda[0]));
      
   
   // Instantiate the DUT - I2C Multi-Bus Controller

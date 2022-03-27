@@ -1,21 +1,26 @@
 class wb_agent extends ncsu_component#(.T(wb_transaction));
 
-   wb_configuration configuration;
-   wb_driver        driver;
-   wb_monitor       monitor;
-   wb_coverage      coverage;
+   wb_configuration    configuration;
+   wb_driver           driver;
+   wb_monitor          monitor;
+   ncsu_component #(T) coverage;
    ncsu_component #(T) subscribers[$];
    virtual wb_if    bus;
 
    function new(string name = "", ncsu_component #(T) parent = null);
       super.new(name, parent);
-      if ( !(ncsu_config_cb#(virtual wb_if)::get(get_full_name(), this.bus)))
-         ncsu_fatal("wb_agent::new()", $sformatf("ncsu_config_db::get() call fo
+      if ( !(ncsu_config_db#(virtual wb_if)::get(get_full_name(), this.bus))) begin;
+         $display("wb_agent::ncsu_config_db::get() call for BFM handle failed for name: %s ",get_full_name());
+         $finish;
       end
    endfunction
 
+   function void set_configuration(wb_configuration cfg);
+      configuration = cfg;
+   endfunction
+
    virtual function void build();
-      driver = new("driver, this);
+      driver = new("driver", this);
       driver.set_configuration(configuration);
       driver.build();
       driver.bus = this.bus;

@@ -12,8 +12,11 @@ class i2c_driver extends ncsu_component#(.T(i2c_transaction));
    endfunction
 
    virtual task bl_put(T trans);
-      ncsu_info("i2c_driver::run()", {get_full_name(), "-", trans.convert2string());
-      bus.drive(trans.address, trans.op_type, trans.data);
+      $display({get_full_name()," ",trans.convert2string()});
+      bus.drive(trans.address, 
+                trans.op_type.name, 
+                trans.data, 
+                );
    endtask
 
 endclass

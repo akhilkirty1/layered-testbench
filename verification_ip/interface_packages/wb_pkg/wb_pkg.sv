@@ -1,4 +1,5 @@
 package wb_pkg;
+
    import ncsu_pkg::*;
    `include "ncsu_macros.svh"
 
@@ -7,9 +8,7 @@ package wb_pkg;
    `include "src/wb_transaction.svh"
    `include "src/wb_driver.svh"
    `include "src/wb_monitor.svh"
-   `include "src/wb_coverage.svh"
    `include "src/wb_agent.svh"
-
-   typedef enum {READ, WRITE} wb_op_t;
+   //`include "src/wb_if.svh"
    
 endpackage

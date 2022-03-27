@@ -1,8 +1,8 @@
-class i2cmb_test extends ncsu_component#(.T(i2cmb_transaction_base));
+class i2cmb_test extends ncsu_component#(.T(wb_transaction));
 
-   env_configuration    cfg;
-   environment          env;
-   generator            gen;
+   i2cmb_env_configuration    cfg;
+   i2cmb_environment          env;
+   i2cmb_generator            gen;
 
    function new(string name = "", ncsu_component #(T) parent = null);
       // Call base class constructor
@@ -20,7 +20,7 @@ class i2cmb_test extends ncsu_component#(.T(i2cmb_transaction_base));
 
       // Initiates and construct generator
       gen = new("gen", this);
-      gen.set_agent(env.get_i2c_agent());
+      gen.set_agent(env.get_p0_agent());
    endfunction
 
    // Runs environment and generator

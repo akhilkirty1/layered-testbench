@@ -12,11 +12,10 @@ class wb_driver extends ncsu_component#(.T(wb_transaction));
    endfunction
 
    virtual task bl_put(T trans);
-      ncsu_info("wb_driver::run()", {get_full_name(), "-", trans.convert
-      bus.drive(trans.header,
-                trans.payload,
-                trans.trailer,
-                trans.delay
+      $display({get_full_name()," ",trans.convert2string()});
+      bus.drive(trans.address, 
+                trans.op_type.name, 
+                trans.data, 
                 );
    endtask
 
