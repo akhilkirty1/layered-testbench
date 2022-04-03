@@ -1,68 +1,135 @@
-// class generator #(type GEN_TRANS)  extends ncsu_component#(.T(wb_transaction));
-class generator extends ncsu_component#(.T(wb_transaction));
+class i2cmb_generator extends ncsu_component;
+   wb_agent  p0_agent;
+   i2c_agent p1_agent;
 
-  wb_transaction transaction[10];
-  ncsu_component #(T) agent;
-  string trans_name;
+   function new(string name="", ncsu_component parent=null); 
+      super.new(name, this);
+   endfunction
 
-  function new(string name = "", ncsu_component #(T) parent = null); 
-    super.new(name,parent);
-    if ( !$value$plusargs("GEN_TRANS_TYPE=%s", trans_name)) begin
-      $display("FATAL: +GEN_TRANS_TYPE plusarg not found on command line");
-      $fatal;
-    end
-    $display("%m found +GEN_TRANS_TYPE=%s", trans_name);
-  endfunction
+   function void set_p0_agent(wb_agent agent);
+      p0_agent = agent;
+   endfunction
 
-  virtual task run();
-    foreach (transaction[i]) begin  
-      $cast(transaction[i], ncsu_object_factory::create(trans_name));
-      assert (transaction[i].randomize());
-      agent.bl_put(transaction[i]);
-      $display({get_full_name()," ",transaction[i].convert2string()});
-    end
-    /*
-    static bit [I2C_DATA_WIDTH-1:0] read_data = 0;
-     
-    // Wait 1000ns
-    #1000
-    
-    iicmb_enable();
+   function void set_p1_agent(i2c_agent agent);
+      p1_agent = agent;
+   endfunction
 
-    // Wait 1000ns
-    #1000
+   virtual task run();
+      fork run_i2c(); join_none
+      run_wb();
+   endtask
 
-    // Start i2c slave
-    fork i2c_slave_start(); join_none
+   task run_wb();
+   endtask
 
-    // Write 32 incrementing values, from 0 to 31, to the i2c_bus
-    for (bit [I2C_DATA_WIDTH-1:0] data = 0; data < 32; data++)
-      iicmb_write(0, 0, {data});
-    
-    // Wait 1000ns
-    #1000
-  
-    // Read 32 values from the i2c_bus (return incrementing data from 100 to 131)
-    repeat(32) iicmb_read(0, 0, read_data);
-  
-    // Wait 1000ns
-    #1000
+   // ****************************************************************
+   // RUN I2C GENERATION
+   // ****************************************************************
+   task run_i2c();
+      forever begin
+         // Wait for I2C Transfer
+         i2c_transaction trans;
+         p1_agent.bl_put(trans);
+      end
+   endtask
 
-    // Alternate writes and reads for 64 transfers 
-    for (integer i = 0; i < 64; i++) begin
-      // increment write data from 64 to 127
-      iicmb_write(0, 0, 64 + i);     // iicmb_write(bus_id, slave_addr, write_data)
-      // decrement read data from 63 to 0
-      iicmb_read(0, 0, read_data);   // iicmb_write(bus_id, slave_addr, read_data)
-    end
-    
-    $finish;
-    */
-  endtask
+   //*****************************************************************
+   // ENABLE I2CMB
+   //*****************************************************************
+   task enable;
+      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, 8'b1100_0000);
+   endtask
 
-  function void set_agent(ncsu_component #(T) agent);
-    this.agent = agent;
-  endfunction
+   //*****************************************************************
+   // WRITE TO A SLAVE ON I2C BUS
+   //*****************************************************************
+   task write(
+      input wb_addr bus_id,
+      input i2c_addr slave_addr,
+      input i2c_data write_data
+   );
+      set_bus(bus_id);
+      capture_bus();
+      initiate_contact(slave_addr); 
+      send_write(write_data);
+      free_bus();
+   endtask
 
+   //*****************************************************************
+   // READ FROM A SLAVE ON I2C BUS
+   //*****************************************************************
+   task read(
+      input wb_addr  bus_id,
+      input i2c_data slave_addr
+   );
+      set_bus(bus_id);
+      capture_bus();
+      initiate_contact(slave_addr); 
+      send_read();
+      free_bus();
+   endtask
+
+   //*****************************************************************
+   // INITIATE CONTACT WITH SLAVE ON I2C BUS
+   //*****************************************************************
+   task initiate_contact(input i2c_addr slave_addr);
+      // Write slave address to the DPR 
+      // The rightmost bit, 0 means writing
+      p0_agent.bl_create_put(DPR, wb_pkg::WRITE, {slave_addr, 1'b0});
+      
+      // Write byte "xxxxx001" to the CMDR
+      // This is the "Write" command
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b001);
+   endtask
+
+   //*****************************************************************
+   // SET BUS
+   //*****************************************************************
+   task set_bus(input wb_addr bus_id);
+      // Write bus_id to the DPR
+      p0_agent.bl_create_put(DPR, wb_pkg::WRITE, bus_id);
+   
+      // Write byte "xxxxx110" to the CMDR
+      // This is "Set Bus" command
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b110);
+   endtask
+
+   //*****************************************************************
+   // CAPTURE BUS
+   //*****************************************************************
+   task capture_bus;
+      // Write byte "xxxxx100" to the CMDR 
+      // This is the "Start" command
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b100);
+   endtask
+
+   //*****************************************************************
+   // SEND WRITE COMMAND TO SLAVE ON I2C BUS
+   //*****************************************************************
+   task send_write(input i2c_data write_data);
+      // Write byte to the DPR
+      p0_agent.bl_create_put(DPR, wb_pkg::WRITE, write_data);
+      
+      // Write byte "xxxxx001" to the CMDR
+      // This is "Write" command
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b001);
+   endtask
+
+   //*****************************************************************
+   // SEND READ COMMAND TO SLAVE ON I2C BUS
+   //*****************************************************************
+   task send_read;
+     // Write byte "xxxxx010" to the CMDR
+     // This is "Read With Ack" command
+     p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b010);
+   endtask
+
+   //*****************************************************************
+   // FREE SELECTED BUS
+   //*****************************************************************
+   task free_bus;
+      // Write byte "xxxxx101" to the CMDR. 
+      // This is "Stop" command
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b101);
+   endtask
 endclass
-

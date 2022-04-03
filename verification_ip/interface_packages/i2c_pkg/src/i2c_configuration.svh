@@ -1,19 +1,18 @@
 class i2c_configuration extends ncsu_configuration;
 
-   rand bit [5:0] min_delay;
-   rand bit [5:0] max_delay;
-   rand bit       sop_eop_polarity;
-   bit            enable;
-   bit            collect_coverage;
+   typedef enum {STANDARD} i2c_mode_t;
 
-   constraint delay_range_c { min_delay < max_delay; }
+   bit enable;
+   i2c_mode_t mode;
+   bit send_ack;
+   bit stretch_clock;
+   bit collect_coverage;
 
    covergroup i2c_configuration_cg;
       option.per_instance = 1;
       option.name = name;
-      coverpoint min_delay;
-      coverpoint max_delay;
-      coverpoint sop_eop_polarity;
+      i2c_enable          : coverpoint enable;
+      i2c_config : cross      mode, stretch_clock, send_ack iff (enable);
    endgroup
 
    function void sample_coverage();

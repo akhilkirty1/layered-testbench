@@ -1,5 +1,4 @@
 class wb_monitor extends ncsu_component#(.T(wb_transaction));
-   
    wb_configuration configuration;
    virtual wb_if bus;
 
@@ -27,14 +26,15 @@ class wb_monitor extends ncsu_component#(.T(wb_transaction));
                      );
 
          // Display Transaction
-         $display("%s abc_monitor::run() Address:0x%x Type:%s Data:0x%x",
+         $display("%s wb_monitor::run() Address:0x%x Type:%s Data:0x%x",
                   get_full_name(),
                   monitored_trans.address, 
                   monitored_trans.op_type.name, 
                   monitored_trans.data, 
                   );
-        parent.nb_put(monitored_trans);
+
+        // Should be nb_put
+        //parent.nb_put(monitored_trans);
       end
    endtask
-
 endclass

@@ -1,7 +1,6 @@
-class i2cmb_predictor extends ncsu_component#(.T(wb_transaction));
+class i2cmb_predictor extends ncsu_component #(.T(i2c_transaction));
 
-  ncsu_component #(T)     scoreboard;
-  wb_transaction          transport_trans;
+  ncsu_component #(T) scoreboard;
   i2cmb_env_configuration configuration;
 
   function new(string name = "", ncsu_component #(T) parent = null); 
@@ -18,7 +17,7 @@ class i2cmb_predictor extends ncsu_component#(.T(wb_transaction));
 
   virtual function void nb_put(T trans);
     $display({get_full_name()," ",trans.convert2string()});
-    scoreboard.nb_transport(trans, transport_trans);
+    scoreboard.nb_transport(trans, trans);
   endfunction
 
 endclass

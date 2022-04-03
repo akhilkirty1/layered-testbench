@@ -1,9 +1,9 @@
 class wb_transaction extends ncsu_transaction;
    `ncsu_register_object(wb_transaction)
 
-   bit [6:0] address;
-   wb_op_t   op_type;
-   bit [7:0]    data;
+   wb_addr address;
+   wb_op_t op_type;
+   wb_data data;
 
    function new(string name="");
       super.new(name);

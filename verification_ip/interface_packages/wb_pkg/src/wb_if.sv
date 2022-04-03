@@ -1,8 +1,6 @@
-interface wb_if       #(
-      int ADDR_WIDTH = 32,                                
-      int DATA_WIDTH = 16                                
-      )
-(
+import wb_pkg::*;
+
+interface wb_if (
   // System sigals
   input wire clk_i,
   input wire rst_i,
@@ -11,17 +9,17 @@ interface wb_if       #(
   output reg cyc_o,
   output reg stb_o,
   input wire ack_i,
-  output reg [ADDR_WIDTH-1:0] adr_o,
+  output reg [WB_ADDR_WIDTH-1:0] adr_o,
   output reg we_o,
   // Slave signals
   input wire cyc_i,
   input wire stb_i,
   output reg ack_o,
-  input wire [ADDR_WIDTH-1:0] adr_i,
+  input wire [WB_ADDR_WIDTH-1:0] adr_i,
   input wire we_i,
   // Shred signals
-  output reg [DATA_WIDTH-1:0] dat_o,
-  input wire [DATA_WIDTH-1:0] dat_i
+  output reg [WB_DATA_WIDTH-1:0] dat_o,
+  input wire [WB_DATA_WIDTH-1:0] dat_i
   );
 
   initial reset_bus();
@@ -52,8 +50,8 @@ interface wb_if       #(
 
 // ****************************************************************************              
   task master_write(
-                   input bit [ADDR_WIDTH-1:0]  addr,
-                   input bit [DATA_WIDTH-1:0]  data
+                   input wb_addr addr,
+                   input wb_data data
                    );  
 
         @(posedge clk_i);
@@ -74,8 +72,8 @@ endtask
 
 // ****************************************************************************              
 task master_read(
-                 input bit [ADDR_WIDTH-1:0]  addr,
-                 output bit [DATA_WIDTH-1:0] data
+                 input wb_addr  addr,
+                 output wb_data data
                  );                                                  
 
         @(posedge clk_i);
@@ -96,22 +94,21 @@ task master_read(
 endtask        
 
 // ****************************************************************************              
-     task master_monitor(
-                   output bit [ADDR_WIDTH-1:0] addr,
-                   output bit [DATA_WIDTH-1:0] data,
-                   output bit we                    
+     task monitor(
+                  output wb_addr addr,
+                  output wb_op_t we,
+                  output wb_data data
                   );
                          
           while (!cyc_o) @(posedge clk_i);                                                  
           while (!ack_i) @(posedge clk_i);
           addr = adr_o;
-          we = we_o;
+          we = we_o ? wb_pkg::WRITE : wb_pkg::READ;
           if (we_o) begin
             data = dat_o;
           end else begin
             data = dat_i;
           end
-          while (cyc_o) @(posedge clk_i);                                                  
+          while (cyc_o) @(posedge clk_i);
      endtask 
-
 endinterface

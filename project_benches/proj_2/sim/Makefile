@@ -24,7 +24,7 @@ comp_I2C_MB:
 	vcom ../rtl/iicmb_m_wb.vhd
 
 
-comp_bench: comp_ncsu_pkg comp_wb_pkg comp_i2c_pkg comp_i2cmb_env_pkg
+comp_bench: comp_I2C_MB comp_ncsu_pkg comp_wb_pkg comp_i2c_pkg comp_i2cmb_env_pkg
 	vlog ../testbench/top.sv
 
 optimize:
@@ -33,6 +33,7 @@ optimize:
 compile: clean comp_I2C_MB comp_bench optimize
 
 simulate:
-	vsim  -i -classdebug -msgmode both -do "set NoQuitOnFinish 1; do wave.do" optimized_debug_top_tb
+	vsim  -c -classdebug -msgmode both optimized_debug_top_tb
+	# vsim  -i -classdebug -msgmode both -do "set NoQuitOnFinish 1; do wave.do" optimized_debug_top_tb
 
 debug: compile simulate

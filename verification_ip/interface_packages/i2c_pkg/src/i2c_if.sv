@@ -2,18 +2,12 @@
 
 import i2c_pkg::*;
 
-interface i2c_if #(
-  int NUM_BUSSES = 1,
-  int ADDR_WIDTH = 7,
-  int DATA_WIDTH = 8,
-  bit [ADDR_WIDTH-1:0] MY_ADDRESS = 0
-)( inout triand sda, inout triand scl );
-   reg sda_o = 1'b1;   
-   reg scl_o = 1'b1;   
-   reg sda_i = 1'b1;   
-   reg scl_i = 1'b1;   
- 
-   typedef bit [DATA_WIDTH-1:0] data_array_t[$]; 
+interface i2c_if(inout triand sda, inout triand scl);
+
+   reg sda_o = 1'b1;
+   reg scl_o = 1'b1;
+   reg sda_i = 1'b1;
+   reg scl_i = 1'b1;
    
    assign sda = sda_o;
    assign scl = scl_o;
@@ -21,83 +15,44 @@ interface i2c_if #(
    always@(sda) sda_i = sda;
    always@(scl) scl_i = scl;
 
-   initial reset_bus();
-
    // ****************************************************************************
-   // RESETS I2C BUS
+   // MONITOR I2C BUS
    // ****************************************************************************
-   task reset_bus();
-     // set sda and scl to 0
-     sda_o <= 1'b1;
-     scl_o <= 1'b1;
+   task monitor(
+      output i2c_addr addr,
+      output i2c_op_t op,
+      output i2c_data_array data
+   );
+      data.delete();
+      wait_for_start_command();
+      read_address(addr);
+      read_operation(op);
+      skip_acknowledgement();
+      watch_write_data(data);
    endtask
 
    // ****************************************************************************
-   // GENERATES READ DATA
+   // CAPTURES TRANSACTION
    // ****************************************************************************
-   integer read_iter = -1;
-   function data_array_t generate_read_data();
-     // increment read_iter
-     read_iter++;
-
-     // send read data
-     if (read_iter < 32) return {100 + read_iter}; // return 100 to 131
-     else return {(63 + 32) - read_iter};          // return 63 to 0
-   endfunction
-
-   // ****************************************************************************
-   // WAITS FOR AND CAPTURES TRANSFER START
-   // ****************************************************************************
-   task automatic wait_for_i2c_transfer(
-      output                      i2c_op_t op,
-      output                      data_array_t write_data
+   task capture_transfer(
+      input  i2c_addr  my_addr,
+      output i2c_op_t op,
+      output i2c_data_array write_data
    );
-     // address of slave
-     bit [ADDR_WIDTH-1:0] addr = 0;
-     
-     // create an iterator to count number of bytes recieved during a read
-     integer num_bytes = 0;
-
-     // wait for start command
-     forever @(negedge sda_i) if (scl_i) break;
-       
-     // read address
-     foreach (addr[i]) @(posedge scl_i) addr[ADDR_WIDTH-1-i] = sda_i;
-
-     // read operation
-     @(posedge scl_i) op = sda_i ?  READ : WRITE;
-
-     // send acknowledge if address matches
-     if (addr == MY_ADDRESS) begin 
-       @(posedge scl_i) sda_o = 1'b0;
-       @(negedge scl_i) sda_o = 1'b1;
-     end else $finish;
-     
+     automatic i2c_addr addr = 0;
+     write_data.delete();
+     wait_for_start_command();
+     read_address(addr);
+     read_operation(op);
+     send_acknowledge(addr, my_addr);
      if (op == READ) return;
-
-     /// collect write data
-     forever begin
-       bit [DATA_WIDTH-1:0] tmp_data;
-       for (integer i = 0; i < DATA_WIDTH; i++)
-         @(posedge scl_i) tmp_data[DATA_WIDTH-1-i] = sda_i;
-       write_data.push_back(tmp_data);
-
-       /// send ack
-       @(posedge scl_i) sda_o = 1'b0;
-       @(negedge scl_i) sda_o = 1'b1;
-
-       // increment bytes recieved count 
-       num_bytes++;
-     end
+     collect_write_data(write_data);
    endtask
 
    // ****************************************************************************
    // PROVIDES DATA FOR READ OPERATION
    // ****************************************************************************
-   task automatic provide_read_data(
-      input      data_array_t read_data,
-      output bit transfer_complete
-   );
+   task provide_read_data(input i2c_data_array read_data);
 
      // send read data to bus
      foreach (read_data[i]) begin
@@ -112,59 +67,70 @@ interface i2c_if #(
         @(posedge scl_i);
 
      end
-      
-     // return transfer_complete
      sda_o = 1'b1;
-     transfer_complete = 1;
-      
    endtask
 
    // ****************************************************************************
-   // RETURNS DATA OBSERVED
+   // TASKS USED IN MONITOR AND CAPTURE METHODS
    // ****************************************************************************
-   task automatic monitor(
-      output bit [ADDR_WIDTH-1:0] addr,
-      output                      i2c_op_t op,
-      output                      data_array_t data
-   );
-
-     // wait for start command
-     forever @(negedge sda_i) if (scl_i) break;
-     fork
-
-        // handle the stop command
-        begin forever @(posedge sda_i) if (scl_i) break; end
-
-        // handle commands
-        begin
-
-          integer num_bytes = 0;
-
-          // read address
-          foreach (addr[i]) @(posedge scl_i) addr[ADDR_WIDTH-1-i] = sda_i;
-
-          // read operation
-          @(posedge scl_i) op = sda_i ?  READ : WRITE;
-
-          // skip acknowledgement
-          @(posedge scl_i); @(negedge scl_i);
-
-          /// collect write data
-          forever begin
-            bit [DATA_WIDTH-1:0] tmp_data;
-            for (integer i = 0; i < DATA_WIDTH; i++)
-              @(posedge scl_i) tmp_data[DATA_WIDTH-1-i] = sda_i;
+   task watch_write_data(output i2c_data_array data);
+      data.delete();
+      fork 
+         wait_for_stop_command();
+         forever begin
+            i2c_data tmp_data;
+            for (integer i = 0; i < I2C_DATA_WIDTH; i++)
+              @(posedge scl_i) tmp_data[I2C_DATA_WIDTH-1-i] = sda_i;
             data.push_back(tmp_data);
 
             /// skip ack
             @(posedge scl_i);
             @(negedge scl_i);
+         end
+      join_any disable fork;
+   endtask
 
-            // increment bytes recieved count 
-            num_bytes++;
-          end
-        end
-      join_any
-      disable fork;
-    endtask
+   task collect_write_data(output i2c_data_array data);
+      data.delete();
+      fork 
+         wait_for_stop_command();
+         forever begin
+            i2c_data tmp_data;
+            for (integer i = 0; i < I2C_DATA_WIDTH; i++)
+              @(posedge scl_i) tmp_data[I2C_DATA_WIDTH-1-i] = sda_i;
+            data.push_back(tmp_data);
+
+            /// skip ack
+            @(posedge scl_i) sda_o = 1'b0;
+            @(negedge scl_i) sda_o = 1'b1;
+         end
+      join_any disable fork;
+   endtask
+
+   task skip_acknowledgement;
+      @(posedge scl_i) @(negedge scl_i);
+   endtask
+
+   task send_acknowledge(input i2c_addr addr, i2c_addr my_addr);
+     if (addr == my_addr) begin 
+       @(posedge scl_i) sda_o = 1'b0;
+       @(negedge scl_i) sda_o = 1'b1;
+     end else begin $display("ACK NOT SENT"); $finish; end
+   endtask
+
+   task read_operation(output i2c_op_t op_type);
+      @(posedge scl_i) op_type = sda_i ?  READ : WRITE;
+   endtask
+   
+   task read_address(output i2c_addr addr);
+      foreach (addr[i]) @(posedge scl_i) addr[I2C_ADDR_WIDTH-1-i] = sda_i;
+   endtask
+   
+   task wait_for_start_command;
+      forever @(negedge sda) if (scl) break;
+   endtask
+
+   task wait_for_stop_command;
+      forever @(posedge sda) if (scl) break;
+   endtask
 endinterface

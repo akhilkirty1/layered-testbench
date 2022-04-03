@@ -10,8 +10,8 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
    function new(string name = "", ncsu_component #(T) parent = null);
       super.new(name, parent);
       if ( !(ncsu_config_db#(virtual wb_if)::get(get_full_name(), this.bus))) begin;
-         $display("wb_agent::ncsu_config_db::get() call for BFM handle failed for name: %s ",get_full_name());
-         $finish;
+        $display("wb_agent::ncsu_config_db::get() call for BFM handle failed for name: %s ",get_full_name());
+        $finish;
       end
    endfunction
 
@@ -20,16 +20,10 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
    endfunction
 
    virtual function void build();
-      driver = new("driver", this);
+      driver = new("wb_driver", this);
       driver.set_configuration(configuration);
       driver.build();
       driver.bus = this.bus;
-      if ( configuration.collect_coverage) begin
-         coverage = new("coverage", this);
-         coverage.set_configuration(configuration);
-         coverage.build();
-         connect_subscriber(coverage);
-      end
       monitor = new("monitor", this);
       monitor.set_configuration(configuration);
       monitor.build();
@@ -50,6 +44,18 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
 
    virtual task run();
       fork monitor.run(); join_none
+   endtask
+
+   task bl_create_put(
+      wb_addr address, 
+      wb_op_t op_type, 
+      wb_data data
+   );
+      wb_transaction trans = new;
+      trans.address = address;
+      trans.op_type = op_type;
+      trans.data    = data;
+      bl_put(trans);
    endtask
 
 endclass

@@ -13,10 +13,15 @@ class wb_driver extends ncsu_component#(.T(wb_transaction));
 
    virtual task bl_put(T trans);
       $display({get_full_name()," ",trans.convert2string()});
-      bus.drive(trans.address, 
-                trans.op_type.name, 
-                trans.data, 
-                );
-   endtask
+      case (trans.op_type) 
+         WRITE: bus.master_write(trans.address, trans.data);
+         READ:  bus.master_read(trans.address, trans.data);
+      endcase
 
+      // Handle commands that require waiting for irq
+      if ((trans.address == CMDR) && (trans.op_type == WRITE)) begin
+         bus.wait_for_interrupt();
+         bus.master_read(trans.address, trans.data);
+      end
+   endtask
 endclass
