@@ -57,5 +57,4 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
       trans.data    = data;
       bl_put(trans);
    endtask
-
 endclass

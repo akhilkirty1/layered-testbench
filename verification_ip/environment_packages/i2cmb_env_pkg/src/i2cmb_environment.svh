@@ -26,13 +26,14 @@ class i2cmb_environment extends ncsu_component;
     pred.build();
     scbd  = new("scbd");
     scbd.build();
+    p1_agent.monitor.set_scoreboard(scbd);
     coverage = new("i2cmb_coverage");
     coverage.set_configuration(configuration);
     coverage.build();
     //p0_agent.connect_subscriber(coverage);
-    //p0_agent.connect_subscriber(pred);
-    //pred.set_scoreboard(scbd);
-    //p1_agent.connect_subscriber(scbd);
+    p0_agent.connect_subscriber(pred);
+    pred.set_scoreboard(scbd);
+    p1_agent.connect_subscriber(scbd);
   endfunction
 
   function wb_agent get_p0_agent();

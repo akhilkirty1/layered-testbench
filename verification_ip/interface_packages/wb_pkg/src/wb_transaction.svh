@@ -22,4 +22,8 @@ class wb_transaction extends ncsu_transaction;
               (this.op_type == rhs.op_type) &&
               (this.data    == rhs.data));
    endfunction
+   
+   function bit is_write();
+     return (this.op_type == WRITE);
+   endfunction 
 endclass

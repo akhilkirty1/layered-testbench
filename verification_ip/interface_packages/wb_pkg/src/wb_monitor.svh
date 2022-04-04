@@ -1,8 +1,8 @@
 class wb_monitor extends ncsu_component#(.T(wb_transaction));
    wb_configuration configuration;
    virtual wb_if bus;
-
    T monitored_trans;
+   ncsu_component #(T) predictor;
 
    function new(string name = "", ncsu_component #(T) parent = null);
       super.new(name, parent);
@@ -12,12 +12,14 @@ class wb_monitor extends ncsu_component#(.T(wb_transaction));
       configuration = cfg;
    endfunction
 
-   virtual task run ();
+   function void set_predictor(wb_configuration cfg);
+      configuration = cfg;
+   endfunction
+
+   virtual task run;
       // Wait for reset
       bus.wait_for_reset();
-
       forever begin
-
          // Read Transaction
          monitored_trans = new("monitored_trans");
          bus.monitor(monitored_trans.address,
@@ -32,9 +34,7 @@ class wb_monitor extends ncsu_component#(.T(wb_transaction));
                   monitored_trans.op_type.name, 
                   monitored_trans.data, 
                   );
-
-        // Should be nb_put
-        //parent.nb_put(monitored_trans);
+         predictor.nb_put(monitored_trans);
       end
    endtask
 endclass
