@@ -7,7 +7,7 @@ module i2cmb_component#(T=ncsu_transaction) extends ncsu_component#(.T(T));
       configuration = cfg;
    endfunction
 
-   function void set_agent(wb_agent agent);
+   function void nb_put(wb_agent agent);
       this.agent = agent;
    endfunction
 endmodule

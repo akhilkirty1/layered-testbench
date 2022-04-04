@@ -26,6 +26,7 @@ class i2cmb_environment extends ncsu_component;
     pred.build();
     scbd  = new("scbd");
     scbd.build();
+    p0_agent.monitor.set_predictor(pred);
     p1_agent.monitor.set_scoreboard(scbd);
     coverage = new("i2cmb_coverage");
     coverage.set_configuration(configuration);
