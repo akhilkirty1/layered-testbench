@@ -2,6 +2,8 @@ class i2c_configuration extends ncsu_configuration;
 
    typedef enum {STANDARD} i2c_mode_t;
 
+   bit log_monitor = 1'b0;
+
    bit enable;
    i2c_mode_t mode;
    bit send_ack;

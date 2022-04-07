@@ -1,12 +1,12 @@
 class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
 
-   i2cmb_scoreboard scoreboard;
-   i2cmb_env_configuration configuration;
+   i2cmb_scoreboard scbd;
+   i2cmb_env_configuration cfg;
    i2c_data_array prediction_data[$];
    i2c_transaction prediction;
 
    // MOVE THESE TO COVERGROUP FOR PROJECT 4
-   bit lose_arbitration = 1'b1;
+   bit lose_arbitration = 1'b0;
    bit no_slave = 1'b0;
    bit no_ack = 1'b0;
    integer g_num_bus = 1;
@@ -22,25 +22,58 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    integer byte_count = 0;
 
   function new(string name = "", ncsu_component parent = null); 
-    super.new(name,parent);
-    reset_registers();
+     super.new(name, parent);
+     reset_registers();
   endfunction 
 
    function void set_configuration(i2cmb_env_configuration cfg);
-     configuration = cfg;
+      this.cfg = cfg;
    endfunction
 
-   virtual function void set_scoreboard(i2cmb_scoreboard scoreboard);
-       this.scoreboard = scoreboard;
+   virtual function void set_scoreboard(i2cmb_scoreboard scbd);
+      this.scbd = scbd;
    endfunction
 
    virtual function void nb_put(T trans);
-      $display("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       // Display Original Transaction
-      $display({get_full_name()," ",trans.convert2string()});
+      // $display({get_full_name()," ",trans.convert2string()});
+
+      // Log Registers
+      if (cfg.log_registers) log_registers();
 
       // Update Registers
       update_registers(trans);
+   endfunction
+
+   //*****************************************************************
+   // LOG REGISTERS
+   //*****************************************************************
+   function void log_registers();
+      $display("CURRENT STATE: ");
+      $display("curr_state = %s", curr_state.name);
+      $display("");
+      $display("CSR REGISTER");
+      $display("csr.en = %b", csr.en);
+      $display("csr.ie = %b", csr.ie);
+      $display("csr.bb = %b", csr.bb);
+      $display("csr.bc = %b", csr.bc);
+      $display("csr.bid = %b", csr.bid);
+      $display("");
+      $display("DPR REGISTER");
+      $display("dpr.data = %b", dpr.data);
+      $display("");
+      $display("CMDR REGISTER");
+      $display("cmdr.don = %b", cmdr.don);
+      $display("cmdr.nak = %b", cmdr.nak);
+      $display("cmdr.al  = %b", cmdr.al);
+      $display("cmdr.err = %b", cmdr.err);
+      $display("cmdr.r   = %b", cmdr.r);
+      $display("cmdr.cmd = %s", cmdr.cmd.name);
+      $display("");
+      $display("FSMR REGISTER");
+      $display("fsmr.byte_fsm = %b", fsmr.byte_fsm);
+      $display("fsmr.bit_fsm = %b", fsmr.bit_fsm);
+      $display("");
    endfunction
 
    //*****************************************************************
@@ -82,7 +115,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
       cmdr.nak = trans.data[6];
       cmdr.cmd = i2cmb_cmd'(trans.data[2:0]);
 
-      run_byte_level_command(trans);
+      run_byte_level_command();
    endfunction
    
    function void write_fsmr(wb_transaction trans);
@@ -112,11 +145,10 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    //*****************************************************************
    // RUN BYTE LEVEL COMMAND
    //*****************************************************************
-   function void run_byte_level_command(wb_transaction trans);
+   function void run_byte_level_command();
       i2c_transaction tmp_pred;
       // break if not enabled
       if (!csr.en) return;
-
       // clear status bits
       cmdr.don = 0;
       cmdr.nak = 0;
@@ -150,8 +182,8 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                      cmdr.err = 1; 
                   end else begin
                      // Else return done and update bid
-                     prediction.data.delete();
-                     csr.bid = trans.data; 
+                     prediction = new;
+                     csr.bid = dpr.data; 
                      cmdr.don = 1; 
                   end
                
@@ -170,7 +202,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                   if (lose_arbitration) begin 
                      cmdr.al = 1;
                   end else if (data_sent) begin 
-                     scoreboard.nb_transport(prediction, tmp_pred);
+                     scbd.nb_transport(prediction, tmp_pred);
                   end else cmdr.don = 1;
                   data_sent = 0;
                   address_sent = 0;
@@ -180,12 +212,13 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                   cmdr.don = 1;
                   curr_state = IDLE;
                   if (address_sent && data_sent) 
-                     scoreboard.nb_transport(prediction, tmp_pred);
+                     scbd.nb_transport(prediction, tmp_pred);
                   address_sent = 0;
                   data_sent = 0;
                end
                  
                WRITE: begin
+                  prediction.op_type = i2c_pkg::WRITE;
                   if (lose_arbitration) begin
                      cmdr.al = 1;
                      curr_state = IDLE;
@@ -194,7 +227,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                      data_sent = 1;
                      prediction.data.push_back(dpr.data);
                   end else if (!address_sent && !no_slave) begin
-                     prediction.address = trans.data;
+                     prediction.address = dpr.data[I2C_ADDR_WIDTH-1:1];
                      address_sent = 1;
                      cmdr.don = 1;
                   end else begin 
@@ -204,6 +237,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                end
 
                READ_WITH_ACK: begin
+                  prediction.op_type = i2c_pkg::READ;
                   if (lose_arbitration) begin
                      cmdr.al = 1;
                      curr_state = IDLE;
@@ -218,6 +252,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                end
 
                READ_WITH_NAK: begin
+                  prediction.op_type = i2c_pkg::READ;
                   if (lose_arbitration) begin
                      cmdr.al = 1;
                      curr_state = IDLE;

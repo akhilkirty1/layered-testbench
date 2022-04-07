@@ -1,16 +1,14 @@
 class i2c_monitor extends ncsu_component#(.T(i2c_transaction));
-   i2c_configuration configuration;
+   i2c_configuration cfg;
    virtual i2c_if bus;
    ncsu_component #(T) scoreboard;
-   T monitored_trans;
 
    function new(string name = "", ncsu_component #(T) parent = null);
       super.new(name, parent);
-      monitored_trans = new("monitored_trans");
    endfunction
 
    function void set_configuration(i2c_configuration cfg);
-      configuration = cfg;
+      this.cfg = cfg;
    endfunction
 
    function void set_scoreboard(ncsu_component #(T) scbd);
@@ -19,7 +17,8 @@ class i2c_monitor extends ncsu_component#(.T(i2c_transaction));
 
    virtual task run ();
       forever begin
-         monitored_trans.data.delete();
+         // Create a new Transaction
+         T monitored_trans = new;
 
          // Read Transaction
          bus.monitor(monitored_trans.address,
@@ -28,14 +27,18 @@ class i2c_monitor extends ncsu_component#(.T(i2c_transaction));
                      );
 
          // Display Transaction
-         $display("%s i2c_monitor::run() Address:0x%x Type:%s Data: %p",
-                  get_full_name(),
-                  monitored_trans.address, 
-                  monitored_trans.op_type.name, 
-                  monitored_trans.data
-                  );
-         scoreboard.bl_put(monitored_trans);
-         monitored_trans.data.delete();
+         if (cfg.log_monitor) begin
+            $display("%s i2c_monitor::run() Address:0x%x Type:%s Data: %p",
+                     get_full_name(),
+                     monitored_trans.address, 
+                     monitored_trans.op_type.name, 
+                     monitored_trans.data
+                     );
+         end
+
+         // Send Transaction to Scoreboard
+         // scoreboard.bl_put(monitored_trans);
+         scoreboard.nb_put(monitored_trans);
       end
    endtask
 endclass

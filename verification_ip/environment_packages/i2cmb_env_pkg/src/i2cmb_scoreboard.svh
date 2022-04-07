@@ -10,7 +10,7 @@ class i2cmb_scoreboard extends ncsu_component#(.T(i2c_transaction));
       $display({get_full_name(),
                 " nb_transport: expected transaction ",
                 input_trans.convert2string()});
-      this.trans_in = input_trans;
+      this.trans_in = new input_trans;
       output_trans = trans_out;
    endfunction
 
@@ -21,7 +21,6 @@ class i2cmb_scoreboard extends ncsu_component#(.T(i2c_transaction));
       if (this.trans_in.compare(trans))
         $display({get_full_name(),   " transaction MATCH!"});
       else begin $display({get_full_name(), " transaction MISMATCH!"}); $finish; end
-      /* else $display({get_full_name(), " transaction MISMATCH!"}); */
    endfunction
    
    virtual task bl_put(T trans);

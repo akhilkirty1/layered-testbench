@@ -3,18 +3,20 @@ class i2c_driver extends ncsu_component#(.T(i2c_transaction));
       super.new(name, parent);
    endfunction
 
-   i2c_configuration configuration;
+   i2c_configuration cfg;
    i2c_transaction   i2c_trans;
    virtual i2c_if    bus;
 
    function void set_configuration(i2c_configuration cfg);
-      configuration = cfg;
+      this.cfg = cfg;
    endfunction
 
    virtual task bl_put(T trans);
       if (trans == null) begin
          trans = new("i2c_driver_transaction");
          bus.capture_transfer(trans.address, trans.op_type, trans.data);
+         // $display("Trans Captured %s", trans.convert2string());
+
          if (trans.op_type == i2c_pkg::READ) begin
             trans.data = generate_read_data();
             bus.provide_read_data(trans.data);

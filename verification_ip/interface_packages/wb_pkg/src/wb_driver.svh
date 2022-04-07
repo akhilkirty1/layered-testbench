@@ -4,24 +4,20 @@ class wb_driver extends ncsu_component#(.T(wb_transaction));
    endfunction
 
    virtual wb_if bus;
-   wb_configuration configuration;
+   wb_configuration cfg;
    wb_transaction wb_trans;
 
    function void set_configuration(wb_configuration cfg);
-      configuration = cfg;
+      this.cfg = cfg;
    endfunction
 
    virtual task bl_put(T trans);
-      $display({get_full_name()," ",trans.convert2string()});
+      if (cfg.log_driver) begin
+         $display({get_full_name()," ",trans.convert2string()});
+      end
       case (trans.op_type) 
          WRITE: bus.master_write(trans.address, trans.data);
          READ:  bus.master_read(trans.address, trans.data);
       endcase
-
-      // Handle commands that require waiting for irq
-      if ((trans.address == CMDR) && (trans.op_type == WRITE)) begin
-         bus.wait_for_interrupt();
-         bus.master_read(trans.address, trans.data);
-      end
    endtask
 endclass
