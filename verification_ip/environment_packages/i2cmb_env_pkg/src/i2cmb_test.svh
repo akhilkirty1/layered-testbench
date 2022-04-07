@@ -22,37 +22,24 @@ class i2cmb_test extends ncsu_component;
       gen = new("gen");
       gen.set_p0_agent(env.get_p0_agent());
       gen.set_p1_agent(env.get_p1_agent());
+      gen.set_configuration(cfg);
    endfunction
 
    // Runs environment and generator
    virtual task run();
       env.run();
       gen.run();
-
+      
       // Enable i2cmb
-      $display("");
-      $display("#----------------------------");
-      $display("# Enabling I2CMB");
-      $display("#----------------------------");
       gen.enable();
-      $display("");
 
       // Run the write test
-      $display("#----------------------------");
-      $display("# Running Write Test");
-      $display("#----------------------------");
       #1000 write_test(0, 0);
 
       // Run the read test
-      $display("#----------------------------");
-      $display("# Running Read Test");
-      $display("#----------------------------");
       #1000 read_test(0, 0);
 
       // Run the read/write test
-      $display("#----------------------------");
-      $display("# Running Write/Read Test");
-      $display("#----------------------------");
       #1000 read_write_test(0, 0);
    endtask
 
@@ -60,11 +47,24 @@ class i2cmb_test extends ncsu_component;
       input wb_addr  bus_id,
       input i2c_addr slave_addr
    );
+    if (cfg.log_tests) begin
+       $display("");
+       $display("#===================================================");
+       $display("#===================================================");
+       $display("#                 Running Write Test                ");
+       $display("#===================================================");
+       $display("#===================================================");
+    end
+
     // Write 32 incrementing values, from 0 to 31, to the i2c_bus
     for (i2c_data data = 0; data < 32; data++) begin
-      $display("Writing %x", data);
+      if (cfg.log_sub_tests) begin
+         $display("");
+         $display("#---------------------------------------------------");
+         $display("#                 Writing 0x%2x                     ", data);
+         $display("#---------------------------------------------------");
+      end
       gen.write(bus_id, slave_addr, data);
-      $display("");
     end
    endtask
 
@@ -73,10 +73,24 @@ class i2cmb_test extends ncsu_component;
       input wb_addr bus_id,
       input i2c_addr slave_addr
    );
-      repeat(32) begin 
-         $display("Reading");
-         gen.read(bus_id, slave_addr);
+      if (cfg.log_tests) begin
          $display("");
+         $display("#===================================================");
+         $display("#===================================================");
+         $display("#                 Running Read Test                 ");
+         $display("#===================================================");
+         $display("#===================================================");
+      end
+
+      for (integer i = 100; i < 132; i = i + 1) begin 
+         if (cfg.log_sub_tests) begin
+            $display("");
+            $display("#---------------------------------------------------");
+            $display("#                     Reading %0d                   ", i);
+            $display("#---------------------------------------------------");
+         end
+         env.pred.prediction_data.push_back('{i});
+         gen.read(bus_id, slave_addr);
       end
    endtask
 
@@ -87,10 +101,34 @@ class i2cmb_test extends ncsu_component;
       input wb_addr  bus_id,
       input i2c_addr slave_addr
    );
-    for (integer i = 0; i < 64; i++) begin
-      gen.write(bus_id, slave_addr, 64 + i);
-      gen.read(bus_id, slave_addr);
-      $display("");
-    end
+       if (cfg.log_tests) begin
+          $display("");
+          $display("#===================================================");
+          $display("#===================================================");
+          $display("#              Running Read/Write Test              ");
+          $display("#===================================================");
+          $display("#===================================================");
+       end
+
+       // Write data from 64 to 127
+       for (integer i = 0; i < 64; i++) begin
+          if (cfg.log_sub_tests) begin
+             $display("");
+             $display("#---------------------------------------------------");
+             $display("#                 Writing 0x%2x                     ", 64 + i);
+             $display("#---------------------------------------------------");
+          end
+          gen.write(bus_id, slave_addr, 64 + i);
+
+          // Read data from 63 to 0
+          if (cfg.log_sub_tests) begin
+             $display("");
+             $display("#---------------------------------------------------");
+             $display("#                     Reading %0d                    ", 63 - i);
+             $display("#---------------------------------------------------");
+          end
+          env.pred.prediction_data.push_back('{63 - i});
+          gen.read(bus_id, slave_addr);
+       end
    endtask
 endclass

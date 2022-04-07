@@ -23,7 +23,6 @@ interface i2c_if(inout triand sda, inout triand scl);
       output i2c_op_t op,
       output i2c_data_array data
    );
-      data.delete();
       wait_for_start_command();
       read_address(addr);
       read_operation(op);
@@ -53,6 +52,8 @@ interface i2c_if(inout triand sda, inout triand scl);
    // PROVIDES DATA FOR READ OPERATION
    // ****************************************************************************
    task provide_read_data(input i2c_data_array read_data);
+     // Providing Read Data
+     // $display("PROVIDING READ DATA %p", read_data);
 
      // send read data to bus
      foreach (read_data[i]) begin
@@ -120,10 +121,14 @@ interface i2c_if(inout triand sda, inout triand scl);
 
    task read_operation(output i2c_op_t op_type);
       @(posedge scl_i) op_type = sda_i ?  READ : WRITE;
+      // $display("Type = %b", op_type);
    endtask
    
    task read_address(output i2c_addr addr);
-      foreach (addr[i]) @(posedge scl_i) addr[I2C_ADDR_WIDTH-1-i] = sda_i;
+      foreach (addr[i]) begin 
+         @(posedge scl_i) addr[I2C_ADDR_WIDTH-1-i] = sda_i;
+         // $display("A%0d = %b", i, sda_i);
+      end
    endtask
    
    task wait_for_start_command;

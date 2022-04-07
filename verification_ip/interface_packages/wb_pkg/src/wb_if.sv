@@ -53,7 +53,6 @@ interface wb_if (
                    input wb_addr addr,
                    input wb_data data
                    );  
-
         @(posedge clk_i);
         adr_o <= addr;
         dat_o <= data;
@@ -67,7 +66,6 @@ interface wb_if (
         dat_o <= 'bx;
         we_o <= 1'b0;
         @(posedge clk_i);
-
 endtask        
 
 // ****************************************************************************              
@@ -75,7 +73,6 @@ task master_read(
                  input wb_addr  addr,
                  output wb_data data
                  );                                                  
-
         @(posedge clk_i);
         adr_o <= addr;
         dat_o <= 'bx;
@@ -90,7 +87,6 @@ task master_read(
         dat_o <= 'bx;
         we_o <= 1'b0;
         data = dat_i;
-
 endtask        
 
 // ****************************************************************************              

@@ -1,5 +1,5 @@
 // Determines whether a transaction is a write or a read
-typedef enum bit { READ, WRITE } i2c_op_t;
+typedef enum bit { WRITE=0, READ=1 } i2c_op_t;
 
 localparam int I2C_NUM_BUSSES = 1;
 localparam int I2C_ADDR_WIDTH = 7;

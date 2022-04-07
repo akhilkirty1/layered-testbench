@@ -31,7 +31,7 @@ class i2cmb_environment extends ncsu_component;
     coverage = new("i2cmb_coverage");
     coverage.set_configuration(configuration);
     coverage.build();
-    //p0_agent.connect_subscriber(coverage);
+    p0_agent.connect_subscriber(coverage);
     p0_agent.connect_subscriber(pred);
     pred.set_scoreboard(scbd);
     p1_agent.connect_subscriber(scbd);

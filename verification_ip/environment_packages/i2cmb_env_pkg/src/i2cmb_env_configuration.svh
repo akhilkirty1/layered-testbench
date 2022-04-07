@@ -1,6 +1,14 @@
 class i2cmb_env_configuration extends ncsu_configuration;
+
+  // Logging Configuration
+  const bit log_commands   = 1'b0;
+  const bit log_registers  = 1'b0;
+  const bit log_components = 1'b0;
+  const bit log_sub_tests  = 1'b1;
+  const bit log_tests      = 1'b1;
+  const bit use_irq        = 1'b1;
+
   /*
-  bit       loopback;
   bit       invert;
   bit [3:0] port_delay;
 

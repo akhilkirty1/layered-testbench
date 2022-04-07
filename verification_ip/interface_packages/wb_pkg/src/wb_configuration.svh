@@ -1,4 +1,7 @@
 class wb_configuration extends ncsu_configuration;
+   
+   bit log_monitor = 1'b0;
+   bit log_driver  = 1'b0;
 
    covergroup wb_configuration_cg;
    endgroup

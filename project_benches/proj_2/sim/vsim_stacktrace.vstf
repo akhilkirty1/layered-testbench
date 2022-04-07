@@ -272,3 +272,1019 @@
 # End of Stack Trace
 
 
+# Current time Tue Apr  5 11:15:46 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 11:17:15 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 11:39:04 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 11:43:25 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 11:50:20 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 11:58:09 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:00:06 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:03:16 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:04:41 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:06:51 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:07:58 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:08:58 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862a5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863df: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:13:17 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf6486295: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:37'
+# 2    0xf64863cf: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:17:20 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf647ef72: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 1    0xf64862ad: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:38'
+# 2    0xf64863ef: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 3    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 4    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 5    0x082de298: '<unknown (@0x82de298)>'
+# 6    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 7    0x0831523d: '<unknown (@0x831523d)>'
+# 8    0x088051c8: '<unknown (@0x88051c8)>'
+# 9    0x0880a930: '<unknown (@0x880a930)>'
+# 10   0x0880c1af: '<unknown (@0x880c1af)>'
+# 11   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 12   0x0a28322b: '<unknown (@0xa28322b)>'
+# 13   0x0a28281a: '<unknown (@0xa28281a)>'
+# 14   0x0a287da3: '<unknown (@0xa287da3)>'
+# 15   0x0a287eba: '<unknown (@0xa287eba)>'
+# 16   0x0a289561: '<unknown (@0xa289561)>'
+# 17   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 18   0x08d13407: '<unknown (@0x8d13407)>'
+# 19   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 20   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 21   0x0a38e718: '<unknown (@0xa38e718)>'
+# 22   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 23   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 24   0x0a149e95: '<unknown (@0xa149e95)>'
+# 25   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 26   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:19:13 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf662d969: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:153'
+# 1    0xf662cb15: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:85'
+# 2    0xf662c374: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:55'
+# 3    0xf662c079: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:43'
+# 4    0xf647f082: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 5    0xf64862ad: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:38'
+# 6    0xf64863ef: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:19'
+# 7    0xf64846f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 8    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 9    0x082de298: '<unknown (@0x82de298)>'
+# 10   0x08199ee6: '<unknown (@0x8199ee6)>'
+# 11   0x0831523d: '<unknown (@0x831523d)>'
+# 12   0x088051c8: '<unknown (@0x88051c8)>'
+# 13   0x0880a930: '<unknown (@0x880a930)>'
+# 14   0x0880c1af: '<unknown (@0x880c1af)>'
+# 15   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 16   0x0a28322b: '<unknown (@0xa28322b)>'
+# 17   0x0a28281a: '<unknown (@0xa28281a)>'
+# 18   0x0a287da3: '<unknown (@0xa287da3)>'
+# 19   0x0a287eba: '<unknown (@0xa287eba)>'
+# 20   0x0a289561: '<unknown (@0xa289561)>'
+# 21   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 22   0x08d13407: '<unknown (@0x8d13407)>'
+# 23   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 24   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 25   0x0a38e718: '<unknown (@0xa38e718)>'
+# 26   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 27   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 28   0x0a149e95: '<unknown (@0xa149e95)>'
+# 29   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 30   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:21:07 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf662d929: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:152'
+# 1    0xf662cad5: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:84'
+# 2    0xf662c334: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:54'
+# 3    0xf662c03a: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_predictor.svh:42'
+# 4    0xf647f0f2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:21'
+# 5    0xf64862d3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:36'
+# 6    0xf648642f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_monitor.svh:18'
+# 7    0xf6484763: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/wb_pkg/src/wb_agent.svh:46'
+# 8    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 9    0x082de298: '<unknown (@0x82de298)>'
+# 10   0x08199ee6: '<unknown (@0x8199ee6)>'
+# 11   0x0831523d: '<unknown (@0x831523d)>'
+# 12   0x088051c8: '<unknown (@0x88051c8)>'
+# 13   0x0880a930: '<unknown (@0x880a930)>'
+# 14   0x0880c1af: '<unknown (@0x880c1af)>'
+# 15   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 16   0x0a28322b: '<unknown (@0xa28322b)>'
+# 17   0x0a28281a: '<unknown (@0xa28281a)>'
+# 18   0x0a287da3: '<unknown (@0xa287da3)>'
+# 19   0x0a287eba: '<unknown (@0xa287eba)>'
+# 20   0x0a289561: '<unknown (@0xa289561)>'
+# 21   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 22   0x08d13407: '<unknown (@0x8d13407)>'
+# 23   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 24   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 25   0x0a38e718: '<unknown (@0xa38e718)>'
+# 26   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 27   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 28   0x0a149e95: '<unknown (@0xa149e95)>'
+# 29   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 30   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:23:39 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e1c8: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf663087b: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:31'
+# 2    0xf647ed62: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621801: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:37'
+# 4    0xf6621a0f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:20'
+# 5    0xf66201c3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 12:25:50 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e208: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf66308cb: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:31'
+# 2    0xf647ed62: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621841: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:37'
+# 4    0xf6621a4f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:20'
+# 5    0xf6620203: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:05:32 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e0e8: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf663063b: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:31'
+# 2    0xf647edd2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621580: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf66216ff: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf66200e3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:06:41 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e178: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf66306cb: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:31'
+# 2    0xf647edd2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621610: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf662178f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf6620173: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:09:31 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e138: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf663054b: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:31'
+# 2    0xf647edd2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf66215d0: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf662174f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf6620133: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:11:49 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e178: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf66306db: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:32'
+# 2    0xf647edd2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621610: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf662178f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf6620173: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:15:32 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e1b8: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf663072b: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:32'
+# 2    0xf647edd2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621650: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf66217cf: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf66201b3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:17:58 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e1f8: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf66307db: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:32'
+# 2    0xf647edd2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621690: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf662180f: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf66201f3: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:26:31 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661e798: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf663170b: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:32'
+# 2    0xf647ee42: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6621c30: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf6621daf: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf6620793: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
+# Current time Tue Apr  5 13:51:01 2022
+# ModelSim SE Stack Trace
+# Program = vsim
+# Id = "2020.4"
+# Version = "2020.10"
+# Date = "Oct 13 2020"
+# Platform = "linux"
+# Signature = 1562aedd0ca2ca72f2c811b4964a5bbf
+# 0    0xf661ed98: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_transaction.svh:20'
+# 1    0xf663244b: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/environment_packages/i2cmb_env_pkg/src/i2cmb_scoreboard.svh:32'
+# 2    0xf647eef2: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/ncsu_pkg/src/ncsu_component.svh:17'
+# 3    0xf6622230: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:38'
+# 4    0xf66223af: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_monitor.svh:18'
+# 5    0xf6620d93: '/afs/unity.ncsu.edu/users/m/mwglen/tmp/ECE745-Project/project_benches/proj_2/sim/../../../verification_ip/interface_packages/i2c_pkg/src/i2c_agent.svh:46'
+# 6    0x09e4605d: '<unknown (@0x9e4605d)>'
+# 7    0x082de298: '<unknown (@0x82de298)>'
+# 8    0x08199ee6: '<unknown (@0x8199ee6)>'
+# 9    0x0831523d: '<unknown (@0x831523d)>'
+# 10   0x088051c8: '<unknown (@0x88051c8)>'
+# 11   0x0880a930: '<unknown (@0x880a930)>'
+# 12   0x0880c1af: '<unknown (@0x880c1af)>'
+# 13   0x08ab4327: '<unknown (@0x8ab4327)>'
+# 14   0x0a28322b: '<unknown (@0xa28322b)>'
+# 15   0x0a28281a: '<unknown (@0xa28281a)>'
+# 16   0x0a287da3: '<unknown (@0xa287da3)>'
+# 17   0x0a287eba: '<unknown (@0xa287eba)>'
+# 18   0x0a289561: '<unknown (@0xa289561)>'
+# 19   0x0a2898d6: '<unknown (@0xa2898d6)>'
+# 20   0x08d13407: '<unknown (@0x8d13407)>'
+# 21   0x0a3315d7: '<unknown (@0xa3315d7)>'
+# 22   0x0a38b8ac: '<unknown (@0xa38b8ac)>'
+# 23   0x0a38e718: '<unknown (@0xa38e718)>'
+# 24   0x0a34aad8: '<unknown (@0xa34aad8)>'
+# 25   0x0a34ade5: '<unknown (@0xa34ade5)>'
+# 26   0x0a149e95: '<unknown (@0xa149e95)>'
+# 27   0x087d2cff: '<unknown (@0x87d2cff)>'
+# 28   0x08673698: '<unknown (@0x8673698)>'
+# End of Stack Trace
+
+
