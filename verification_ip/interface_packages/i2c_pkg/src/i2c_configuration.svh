@@ -14,6 +14,7 @@ class i2c_configuration extends ncsu_configuration;
        i2c_config : cross      mode, stretch_time, send_ack;
     endgroup
 
+   integer time_to_stretch;
    covergroup i2c_env_cg;
       i2c_config : coverpoint time_to_stretch;
    endgroup

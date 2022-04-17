@@ -1,13 +1,28 @@
 class i2cmb_coverage extends ncsu_component #(wb_transaction);
 
-   i2cmb_env_configuration configuration;
-
+   bit op_type;
+   bit addr;
+   bit data;
    covergroup i2c_agent_cg;
-      op_x_addr
+      op_x_addr: cross op_type, addr;
+      op_x_data: cross op_type, data;
    endgroup
 
-   covergroup i2c_env_cg;
-      time_to_stretch: cross;
+   bit stretch_time;
+   covergroup i2c_conf_cg;
+      stretch_time: coverpoint stretch_time {
+        bins range[10] = {[0:$]};
+      }
+   endgroup
+
+   bit register;
+   covergroup wb_agent_cg;
+     reg_x_op:   cross op_type, register;
+     reg_x_data: cross op_type, data;
+   endgroup
+
+   covergroup arbitration_cg;
+      op: coverpoint op_type;
    endgroup
  
    // Verify that the IRQ line is held low if it is disabled
@@ -15,12 +30,16 @@ class i2cmb_coverage extends ncsu_component #(wb_transaction);
    //    assert (enable_irq || irq == 1'b0)
 
    function void set_configuration(i2cmb_env_configuration cfg);
-      configuration = cfg;
+      //configuration = cfg;
    endfunction
 
    function new(string name = "", ncsu_component parent = null); 
       super.new(name,parent);
       //coverage_cg = new;
+      wb_agent_cg = new;
+      i2c_agent_cg = new;
+      i2c_conf_cg  = new;
+      arbitration_cg = new;
    endfunction
 
    virtual function void nb_put(T trans);
@@ -34,5 +53,6 @@ class i2cmb_coverage extends ncsu_component #(wb_transaction);
       assert_valid_response:       assert (1);
       assert_correct_response:     assert (1);
       assert_irq_low_if_disabled:  assert (1);
+      assert_correct_i2c_trans:    assert (1);
    endfunction
 endclass

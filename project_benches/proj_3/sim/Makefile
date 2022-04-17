@@ -1,7 +1,7 @@
 export ECE745_PROJECT_HOME ?= $(PWD)/../../..
 export VLOG ?= vlog +incdir+$(ECE745_PROJECT_HOME)/verification_ip/ncsu_pkg
 
-GEN_TRANS_TYPE ?= i2c_transaction
+TEST_TYPE ?= i2c_random_test
 TEST_SEED ?= 12345
 
 include $(ECE745_PROJECT_HOME)/verification_ip/interface_packages/wb_pkg/Makefile
@@ -36,10 +36,10 @@ optimize:
 compile: clean comp_I2C_MB comp_bench optimize
 
 run_cli:
-	vsim  -c -sv_seed $(TEST_SEED) -do "set NoQuitOnFinish 1; run -a; coverage attribute -name TESTNAME -value $(GEN_TRANS_TYPE); coverage save $(GEN_TRANS_TYPE).$(TEST_SEED).ucdb; quit -f" +GEN_TRANS_TYPE=$(GEN_TRANS_TYPE) optimized_debug_top_tb
+	vsim  -c -sv_seed $(TEST_SEED) -do "set NoQuitOnFinish 1; run -a; coverage attribute -name TESTNAME -value $(TEST_TYPE); coverage save $(TEST_TYPE).$(TEST_SEED).ucdb; quit -f" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
 
 run_gui:
-	vsim  -sv_seed $(TEST_SEED) -do "do wave.do;run -a" +GEN_TRANS_TYPE=$(GEN_TRANS_TYPE) optimized_debug_top_tb
+	vsim  -sv_seed $(TEST_SEED) -do "do wave.do;run -a" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
 
 run_gui:
 
