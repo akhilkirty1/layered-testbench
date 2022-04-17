@@ -2,6 +2,7 @@ class i2cmb_generator extends ncsu_component;
    wb_agent  p0_agent;
    i2c_agent p1_agent;
    i2cmb_env_configuration cfg;
+   //i2c_data_arr provide_data;
 
    function new(string name="", ncsu_component parent=null); 
       super.new(name, this);

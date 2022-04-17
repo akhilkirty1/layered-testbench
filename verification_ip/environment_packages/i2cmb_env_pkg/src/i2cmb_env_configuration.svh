@@ -6,20 +6,8 @@ class i2cmb_env_configuration extends ncsu_configuration;
   const bit log_components = 1'b0;
   const bit log_sub_tests  = 1'b1;
   const bit log_tests      = 1'b1;
-  const bit use_irq        = 1'b1;
+  const bit enable_irq     = 1'b1;
 
-  /*
-  bit       invert;
-  bit [3:0] port_delay;
-
-  covergroup i2cmb_env_configuration_cg;
-     option.per_instance = 1;
-     option.name = name;
-     coverpoint loopback;
-     coverpoint invert;
-     coverpoint port_delay;
-  endgroup
-  */
   function void sample_coverage();
      // i2cmb_env_configuration_cg.sample();
   endfunction
