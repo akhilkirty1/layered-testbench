@@ -1,10 +1,17 @@
 /// Registers
+typedef enum {
+   CSR,
+   DPR,
+   CMDR,
+   FSMR
+} i2cmb_reg;
+
 // Control/Status Register (CSR)
 typedef struct packed {
-   bit en; // enable
-   bit ie; // interrupt enable
-   bit bb; // bus busy
-   bit bc; // bus captured
+   bit en;        // enable
+   bit ie;        // interrupt enable
+   bit bb;        // bus busy
+   bit bc;        // bus captured
    bit [3:0] bid; // bus id
 } csr_reg;
 

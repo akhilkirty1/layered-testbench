@@ -7,3 +7,4 @@ localparam int I2C_DATA_WIDTH = 8;
 typedef bit [I2C_ADDR_WIDTH-1:0] i2c_addr;
 typedef bit [I2C_DATA_WIDTH-1:0] i2c_data;
 typedef bit [I2C_DATA_WIDTH-1:0] i2c_data_array [$];
+

@@ -1,6 +1,7 @@
 class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
 
    i2cmb_scoreboard scbd;
+   i2cmb_generator  gen;
    i2cmb_env_configuration cfg;
    i2c_data_array prediction_data[$];
    i2c_transaction prediction;
@@ -12,7 +13,6 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    integer g_num_bus = 1;
    bit data_sent = 0;
    bit address_sent = 0;
-   bit irq = 0;
 
    csr_reg csr;
    dpr_reg dpr;
@@ -20,20 +20,40 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    fsmr_reg fsmr;
    i2cmb_state curr_state = IDLE;
    integer byte_count = 0;
+   bit irq = 0;
 
+   //*****************************************************************
+   // CONSTRUCTOR
+   //*****************************************************************
   function new(string name = "", ncsu_component parent = null); 
      super.new(name, parent);
      reset_registers();
   endfunction 
 
+   //*****************************************************************
+   // SET CONFIRURATION
+   //*****************************************************************
    function void set_configuration(i2cmb_env_configuration cfg);
       this.cfg = cfg;
    endfunction
 
+   //*****************************************************************
+   // SET SCOREBOARD
+   //*****************************************************************
    virtual function void set_scoreboard(i2cmb_scoreboard scbd);
       this.scbd = scbd;
    endfunction
 
+   //*****************************************************************
+   // SET GENERATOR
+   //*****************************************************************
+   function void set_generator(i2cmb_generator gen);
+      this.gen = gen;
+   endfunction
+
+   //*****************************************************************
+   // NON-BLOCKING PUT
+   //*****************************************************************
    virtual function void nb_put(T trans);
       // Display Original Transaction
       // $display({get_full_name()," ",trans.convert2string()});
@@ -45,6 +65,19 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
       update_registers(trans);
    endfunction
 
+   //*****************************************************************
+   // READ PREDICTED REGISTERS
+   //*****************************************************************
+   // Returns the current value of a register
+   function byte read_reg(i2cmb_reg register);
+      case (register)
+         CSR:  return byte'(csr);
+         DPR:  return byte'(dpr);
+         CMDR: return byte'(cmdr);
+         FSMR: return byte'(fsmr);
+      endcase
+   endfunction
+ 
    //*****************************************************************
    // LOG REGISTERS
    //*****************************************************************
@@ -117,7 +150,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
 
       run_byte_level_command();
    endfunction
-   
+ 
    function void write_fsmr(wb_transaction trans);
    endfunction
    
@@ -244,7 +277,8 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                   end else if (address_sent && !no_ack) begin
                      data_sent = 1;
                      cmdr.don = 1;
-                     prediction.data = prediction_data.pop_front();
+                     prediction.data = gen.provide_data;
+                     
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;

@@ -120,7 +120,7 @@ interface i2c_if(inout triand sda, inout triand scl);
    endtask
 
    task read_operation(output i2c_op_t op_type);
-      @(posedge scl_i) op_type = sda_i ?  READ : WRITE;
+      @(posedge scl_i) op_type = sda_i ? READ : WRITE;
       // $display("Type = %b", op_type);
    endtask
    

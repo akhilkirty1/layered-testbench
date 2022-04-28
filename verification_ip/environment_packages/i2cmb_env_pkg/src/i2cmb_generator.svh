@@ -1,52 +1,57 @@
 class i2cmb_generator extends ncsu_component;
-
+   
    wb_agent  p0_agent;
    i2c_agent p1_agent;
    i2cmb_env_configuration cfg;
-   //i2c_data_arr provide_data;
-   string trans_name;
+   i2c_data_array provide_data;
 
+   //*****************************************************************
+   // CONSTRUCTOR
+   //*****************************************************************
    function new(string name="", ncsu_component parent=null); 
       super.new(name, this);
    endfunction
 
+   //*****************************************************************
+   // SET CONFIRURATION
+   //*****************************************************************
    function void set_configuration(i2cmb_env_configuration conf);
       this.cfg = conf;
    endfunction
 
+   //*****************************************************************
+   // SET P0 AGENT
+   //*****************************************************************
    function void set_p0_agent(wb_agent agent);
       p0_agent = agent;
    endfunction
 
+   //*****************************************************************
+   // SET P1 AGENT
+   //*****************************************************************
    function void set_p1_agent(i2c_agent agent);
       p1_agent = agent;
    endfunction
 
+   //*****************************************************************
+   // RUN GENERATOR
+   //*****************************************************************
    virtual task run();
-      fork 
-        run_i2c(); 
-        run_wb();
+      fork
+        // Start I2C Driver
+        forever begin
+            // Wait for I2C Transfer
+            i2c_transaction trans;
+            p1_agent.bl_put(trans);
+        end
       join_none
-   endtask
-
-   task run_wb();
-   endtask
-
-   //*****************************************************************
-   // START I2C DRIVER
-   //*****************************************************************
-   task run_i2c();
-      forever begin
-         // Wait for I2C Transfer
-         i2c_transaction trans;
-         p1_agent.bl_put(trans);
-      end
    endtask
 
    //*****************************************************************
    // ENABLE I2CMB
    //*****************************************************************
-   task enable;
+   task enable();
+      wb_data data;
       if (cfg.log_tests) begin
          $display("");
          $display("#===================================================");
@@ -55,34 +60,49 @@ class i2cmb_generator extends ncsu_component;
          $display("#===================================================");
          $display("#===================================================");
       end
-      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, 8'b1100_0000);
+      data = {1'b1, cfg.enable_irq, 6'b0};
+      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, data);
+   endtask
+   
+   //*****************************************************************
+   // READ A I2CMB REGISTER
+   //*****************************************************************
+   task read_reg(input i2cmb_reg reg_to_read, output wb_data reg_value);
+      p0_agent.bl_create_put(reg_to_read, wb_pkg::READ, reg_value);
+   endtask
+
+   //*****************************************************************
+   // WRITE A I2CMB REGISTER
+   //*****************************************************************
+   task write_reg(input i2cmb_reg reg_to_write, input wb_data data);
+      p0_agent.bl_create_put(reg_to_write, wb_pkg::WRITE, data);
    endtask
 
    //*****************************************************************
    // WRITE TO A SLAVE ON I2C BUS
    //*****************************************************************
-   task write(
-      input wb_addr bus_id,
-      input i2c_addr slave_addr,
-      input i2c_data write_data
-   );
-      set_bus(bus_id);
+   task write();
+      set_bus();
       capture_bus();
-      initiate_write(slave_addr); 
-      send_write(write_data);
+      initiate_write(); 
+      send_write();
       free_bus();
    endtask
 
    //*****************************************************************
    // READ FROM A SLAVE ON I2C BUS
    //*****************************************************************
-   task read(
-      input wb_addr  bus_id,
-      input i2c_data slave_addr
-   );
-      set_bus(bus_id);
+   task read();
+      // Use random read data
+      int num_bytes = $urandom_range(1, 5);
+      for (int i = 0; i < num_bytes; i++) begin
+         i2c_data data = $urandom();
+         provide_data.push_back(data);
+      end
+
+      set_bus();
       capture_bus();
-      initiate_read(slave_addr); 
+      initiate_read();
       send_read();
       free_bus();
    endtask
@@ -90,7 +110,11 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // SET BUS
    //*****************************************************************
-   task set_bus(input wb_addr bus_id);
+   task set_bus();
+
+      // Use a random bus id
+      wb_data bus_id = $urandom_range(I2C_NUM_BUSSES-1);
+
       if (cfg.log_commands) $display("#### Setting the Bus");
 
       // Write bus_id to the DPR
@@ -106,7 +130,7 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // CAPTURE BUS
    //*****************************************************************
-   task capture_bus;
+   task capture_bus();
       if (cfg.log_commands) $display("### Capturing Bus");
 
       // Write byte "xxxxx100" to the CMDR 
@@ -118,7 +142,11 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // INITIATE WRITE WITH SLAVE ON I2C BUS
    //*****************************************************************
-   task initiate_write(input i2c_addr slave_addr);
+   task initiate_write();
+
+      // Use a random slave address
+      i2c_addr slave_addr = $urandom();
+
       if (cfg.log_commands) $display("### Contacting Slave");
 
       // Write slave address to the DPR 
@@ -135,7 +163,11 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // INITIATE READ WITH SLAVE ON I2C BUS
    //*****************************************************************
-   task initiate_read(input i2c_addr slave_addr);
+   task initiate_read();
+
+      // Use a random slave address
+      i2c_addr slave_addr = $urandom();
+
       if (cfg.log_commands) $display("### Contacting Slave");
 
       // Write slave address to the DPR 
@@ -152,7 +184,12 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // SEND WRITE COMMAND TO SLAVE ON I2C BUS
    //*****************************************************************
-   task send_write(input i2c_data write_data);
+   task send_write();
+
+      // Use random write data
+      wb_data write_data = $urandom();
+
+      // Log if necessary
       if (cfg.log_commands) $display("### Sending Write");
 
       // Write byte to the DPR
@@ -168,7 +205,7 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // SEND READ COMMAND TO SLAVE ON I2C BUS
    //*****************************************************************
-   task send_read;
+   task send_read();
       if (cfg.log_commands) $display("### Sending Read");
 
       // Write byte "xxxxx010" to the CMDR
@@ -180,7 +217,7 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    // FREE SELECTED BUS
    //*****************************************************************
-   task free_bus;
+   task free_bus();
       if (cfg.log_commands) $display("### Freeing Bus");
 
       // Write byte "xxxxx101" to the CMDR. 

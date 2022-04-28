@@ -2,19 +2,18 @@ class wb_configuration extends ncsu_configuration;
    
    bit log_monitor = 1'b0;
    bit log_driver  = 1'b0;
+   bit enable_irq  = 1'b0;
 
-   covergroup wb_configuration_cg;
-   endgroup
-
-   function void sample_coverage();
-      wb_configuration_cg.sample();
-   endfunction
-
+   //****************************************************************
+   // CONSTRUCTOR
+   //****************************************************************
    function new(string name="");
       super.new(name);
-      wb_configuration_cg = new;
    endfunction
 
+   //****************************************************************
+   // CONVERT TO STRING
+   //****************************************************************
    virtual function string convert2string();
       return {super.convert2string};
    endfunction

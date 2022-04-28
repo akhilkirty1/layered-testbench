@@ -36,12 +36,10 @@ optimize:
 compile: clean comp_I2C_MB comp_bench optimize
 
 run_cli:
-	vsim  -c -sv_seed $(TEST_SEED) -do "set NoQuitOnFinish 1; run -a; coverage attribute -name TESTNAME -value $(TEST_TYPE); coverage save $(TEST_TYPE).$(TEST_SEED).ucdb; quit -f" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
+	vsim  -c -sv_seed $(TEST_SEED) -do "run -a; coverage attribute -name TESTNAME -value $(TEST_TYPE); coverage save $(TEST_TYPE).$(TEST_SEED).ucdb; quit -f" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
 
 run_gui:
 	vsim  -sv_seed $(TEST_SEED) -do "do wave.do;run -a" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
-
-run_gui:
 
 cli: compile run_cli
 

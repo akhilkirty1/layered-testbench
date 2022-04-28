@@ -1,6 +1,6 @@
 class i2c_agent extends ncsu_component#(.T(i2c_transaction));
 
-   i2c_configuration configuration;
+   i2c_configuration   cfg;
    i2c_driver          driver;
    i2c_monitor         monitor;
    ncsu_component #(T) coverage;
@@ -16,16 +16,16 @@ class i2c_agent extends ncsu_component#(.T(i2c_transaction));
    endfunction
 
    function void set_configuration(i2c_configuration cfg);
-      configuration = cfg;
+      this.cfg = cfg;
    endfunction
 
    virtual function void build();
       driver = new("i2c_driver", this);
-      driver.set_configuration(configuration);
+      driver.set_configuration(cfg);
       driver.build();
       driver.bus = this.bus;
       monitor = new("i2c_monitor", this);
-      monitor.set_configuration(configuration);
+      monitor.set_configuration(cfg);
       monitor.build();
       monitor.bus = this.bus;
    endfunction
