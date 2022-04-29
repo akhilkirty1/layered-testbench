@@ -4,13 +4,9 @@ class i2c_monitor extends ncsu_component#(.T(i2c_transaction));
    ncsu_component #(T) scbd;
    virtual i2c_if bus;
 
-   covergroup i2c_monitor_cg with function sample (
-      i2c_op_t op_type, 
-      i2c_addr addr, 
-      i2c_data data
-   );
-      op_x_addr: cross op_type, addr;
-      op_x_data: cross op_type, data;
+   covergroup i2c_monitor_cg with function sample (i2c_transaction trans);
+      op_x_addr: cross trans.op, trans.addr;
+      op_x_data: cross trans.op, trans.data;
    endgroup
 
    //****************************************************************
@@ -42,35 +38,26 @@ class i2c_monitor extends ncsu_component#(.T(i2c_transaction));
       forever begin
 
          // Create a new Transaction
-         T monitored_trans = new;
+         T trans = new;
 
          // Read Transaction
-         bus.monitor(monitored_trans.address,
-                     monitored_trans.op_type,
-                     monitored_trans.data
-                     );
+         bus.monitor(trans);
 
          // Display Transaction
-         if (cfg.log_monitor) begin
-            $display(
-               "%s i2c_monitor::run() Address:0x%x Type:%s Data: %p",
-               get_full_name(),
-               monitored_trans.address, 
-               monitored_trans.op_type.name, 
-               monitored_trans.data
-            );
-         end
-         foreach (monitored_trans.data[i]) begin
-            // Sample Covergroup
-            i2c_monitor_cg.sample(
-               monitored_trans.op_type, 
-               monitored_trans.address,
-               monitored_trans.data[i]
-            );
-         end
+         if (cfg.log_monitor)
+            $display("%s i2c_monitor::run() Address: 0x%x Type: 0x%x Type: %s",
+                     get_full_name(),
+                     trans.addr, 
+                     trans.data,
+                     trans.op.name
+                     );
+         
+         // Sample Covergroup
+         i2c_monitor_cg.sample(trans);
          
          // Send Transaction to Scoreboard
-         scbd.nb_put(monitored_trans);
+         scbd.nb_put(trans);
+         
       end
    endtask
 endclass

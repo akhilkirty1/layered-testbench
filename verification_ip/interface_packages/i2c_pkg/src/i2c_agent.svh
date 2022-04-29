@@ -7,6 +7,9 @@ class i2c_agent extends ncsu_component#(.T(i2c_transaction));
    ncsu_component #(T) subscribers[$];
    virtual i2c_if    bus;
 
+   //*****************************************************************
+   // CONSTRUCTOR
+   //*****************************************************************
    function new(string name = "", ncsu_component #(T) parent = null);
       super.new(name, parent);
       if ( !(ncsu_config_db#(virtual i2c_if)::get(get_full_name(), this.bus))) begin;
@@ -15,10 +18,16 @@ class i2c_agent extends ncsu_component#(.T(i2c_transaction));
       end
    endfunction
 
+   //*****************************************************************
+   // SET CONFIGURATION
+   //*****************************************************************
    function void set_configuration(i2c_configuration cfg);
       this.cfg = cfg;
    endfunction
 
+   //*****************************************************************
+   // BUILD
+   //*****************************************************************
    virtual function void build();
       driver = new("i2c_driver", this);
       driver.set_configuration(cfg);
@@ -30,20 +39,31 @@ class i2c_agent extends ncsu_component#(.T(i2c_transaction));
       monitor.bus = this.bus;
    endfunction
 
+   //*****************************************************************
+   // NON-BLOCKING PUT
+   //*****************************************************************
    virtual function void nb_put(T trans);
       foreach (subscribers[i]) subscribers[i].nb_put(trans);
    endfunction
 
+   //*****************************************************************
+   // BLOCKING PUT
+   //*****************************************************************
    virtual task bl_put(T trans);
       driver.bl_put(trans);
    endtask
 
+   //*****************************************************************
+   // CONNECT SUBSCRIBER
+   //*****************************************************************
    virtual function void connect_subscriber(ncsu_component #(T) subscriber);
       subscribers.push_back(subscriber);
    endfunction
 
+   //*****************************************************************
+   // RUN AGENT
+   //*****************************************************************
    virtual task run();
       fork monitor.run(); join_none
    endtask
-
 endclass

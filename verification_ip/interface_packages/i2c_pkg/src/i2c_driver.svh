@@ -23,13 +23,13 @@ class i2c_driver extends ncsu_component#(.T(i2c_transaction));
    //****************************************************************
    virtual task bl_put(T trans);
       if (trans == null) begin
-         trans = new("i2c_driver_transaction");
-         bus.capture_transfer(trans.address, trans.op_type, trans.data);
-         // $display("Trans Captured %s", trans.convert2string());
+         // Wait for an I2C Transaction
+         bus.capture_transfer(trans);
 
-         if (trans.op_type == i2c_pkg::READ) begin
-            //trans.data = gen.provide_data;
-            bus.provide_read_data(trans.data);
+         // If it was a read, provide read data
+         if (trans.op == i2c_pkg::READ) begin
+            // trans.data = gen.provide_data;
+            bus.send_read_data(0);
          end
       end
    endtask

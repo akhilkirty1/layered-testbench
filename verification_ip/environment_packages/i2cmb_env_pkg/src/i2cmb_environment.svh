@@ -27,6 +27,7 @@ class i2cmb_environment extends ncsu_component;
    //******************************************************
    function void set_generator(i2cmb_generator gen);
       this.gen = gen;
+      pred.set_generator(gen);
    endfunction
 
    //******************************************************
@@ -66,7 +67,6 @@ class i2cmb_environment extends ncsu_component;
       p0_agent.connect_subscriber(coverage);
       p0_agent.connect_subscriber(pred);
       pred.set_scoreboard(scbd);
-      pred.set_generator(gen);
       p1_agent.connect_subscriber(scbd);
    endfunction
 

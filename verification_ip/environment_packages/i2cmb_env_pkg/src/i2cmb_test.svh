@@ -27,7 +27,6 @@ class i2cmb_test extends ncsu_component;
       // Initiates and construct environment
       env = new("env", this);
       env.set_configuration(cfg);
-      env.set_generator(gen);
       env.build();
 
       // Initiates and construct generator
@@ -35,6 +34,9 @@ class i2cmb_test extends ncsu_component;
       gen.set_p0_agent(env.get_p0_agent());
       gen.set_p1_agent(env.get_p1_agent());
       gen.set_configuration(cfg);
+
+      // Tell environment about generator
+      env.set_generator(gen);
    endfunction
 
    //******************************************************
@@ -247,18 +249,12 @@ class i2cmb_test extends ncsu_component;
       
       // Send and verify 10,000 random i2c transactions
       // using the wb interface
-      for (int i = 0; i < 1; i++) begin
+      for (int i = 0; i < 10000; i++) begin
          
-         // Choose a random I2C operation to test
-         i2c_op_t rand_op;
-         rand_op = i2c_op_t'($urandom_range(0, 1));
-         
-         if (cfg.log_sub_tests) begin
-            $display("");
-            $display("#---------------------------------------------------");
-            $display("#                   Write %2d/32                    ", i+1);
-            $display("#---------------------------------------------------");
-         end
+         // Choose a random i2c operation to test
+         i2c_op_t rand_op = i2c_op_t'($urandom_range(0, 1));
+
+         // Send i2c command
          case (rand_op)
             i2c_pkg::READ:  gen.read();
             i2c_pkg::WRITE: gen.write();
@@ -287,9 +283,9 @@ class i2cmb_test extends ncsu_component;
       // Loop through registers and verify that each is correct
       curr_reg = curr_reg.first;
       do begin
-
          // Send a command to read the register
-         gen.p0_agent.bl_create_put(curr_reg, wb_pkg::READ, 0);
+         wb_data data = 0;
+         gen.p0_agent.bl_create_put(curr_reg, wb_pkg::READ, data);
         
          // Verify that predicted register values are equal to actual values 
          pred_val = env.pred.read_reg(curr_reg);

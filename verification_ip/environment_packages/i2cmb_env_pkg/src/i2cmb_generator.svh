@@ -2,8 +2,8 @@ class i2cmb_generator extends ncsu_component;
    
    wb_agent  p0_agent;
    i2c_agent p1_agent;
+   i2c_data  provide_data;
    i2cmb_env_configuration cfg;
-   i2c_data_array provide_data;
 
    //*****************************************************************
    // CONSTRUCTOR
@@ -37,21 +37,17 @@ class i2cmb_generator extends ncsu_component;
    // RUN GENERATOR
    //*****************************************************************
    virtual task run();
-      fork
-        // Start I2C Driver
-        forever begin
-            // Wait for I2C Transfer
-            i2c_transaction trans;
-            p1_agent.bl_put(trans);
-        end
-      join_none
+      // Start collecting i2c transactions
+      fork forever begin
+         i2c_transaction trans;
+         p1_agent.bl_put(trans);
+      end join_none
    endtask
 
    //*****************************************************************
    // ENABLE I2CMB
    //*****************************************************************
    task enable();
-      wb_data data;
       if (cfg.log_tests) begin
          $display("");
          $display("#===================================================");
@@ -60,8 +56,7 @@ class i2cmb_generator extends ncsu_component;
          $display("#===================================================");
          $display("#===================================================");
       end
-      data = {1'b1, cfg.enable_irq, 6'b0};
-      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, data);
+      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, {1'b1, cfg.enable_irq, 6'b0});
    endtask
    
    //*****************************************************************
@@ -93,13 +88,10 @@ class i2cmb_generator extends ncsu_component;
    // READ FROM A SLAVE ON I2C BUS
    //*****************************************************************
    task read();
-      // Use random read data
-      int num_bytes = $urandom_range(1, 5);
-      for (int i = 0; i < num_bytes; i++) begin
-         i2c_data data = $urandom();
-         provide_data.push_back(data);
-      end
-
+      // Provide random read data
+      provide_data = $urandom();
+      
+      // Send read transaction
       set_bus();
       capture_bus();
       initiate_read();
@@ -111,8 +103,7 @@ class i2cmb_generator extends ncsu_component;
    // SET BUS
    //*****************************************************************
    task set_bus();
-
-      // Use a random bus id
+      // Use a random i2c bus
       wb_data bus_id = $urandom_range(I2C_NUM_BUSSES-1);
 
       if (cfg.log_commands) $display("#### Setting the Bus");
@@ -207,10 +198,14 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    task send_read();
       if (cfg.log_commands) $display("### Sending Read");
-
+      
+      // Write read data to DPR
+      if (cfg.log_commands) $display("# Writing read data to DPR");
+      p0_agent.bl_create_put(DPR, wb_pkg::WRITE, 8'b000);
+      
       // Write byte "xxxxx010" to the CMDR
       // This is "Read With Ack" command
-      if (cfg.log_commands) $display("# Running read command");
+      if (cfg.log_commands) $display("# Sending read command");
       p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b010);
    endtask
 

@@ -1,9 +1,9 @@
 class i2c_transaction extends ncsu_transaction;
    `ncsu_register_object(i2c_transaction)
 
-   i2c_addr address;
-   i2c_op_t op_type;
-   i2c_data_array data;
+   i2c_addr addr;
+   i2c_data data;
+   i2c_op_t op;
 
    //****************************************************************
    // CONSTRUCTOR
@@ -18,15 +18,18 @@ class i2c_transaction extends ncsu_transaction;
    virtual function string convert2string();
       return {
          super.convert2string(), 
-         $sformatf("Address:0x%x Type:%s Data: %p",
-                   this.address,
-                   this.op_type.name,
-                   this.data)};
+         $sformatf("Address:0x%x Data:0x%x Type: %s",
+                   this.addr,
+                   this.data,
+                   this.op.name)};
    endfunction
    
+   //****************************************************************
+   // COMPARE
+   //****************************************************************
    function bit compare(i2c_transaction rhs);
-      return ((this.address == rhs.address) &&
-              (this.op_type == rhs.op_type) &&
-              (this.data    == rhs.data));
+      return ((this.addr == rhs.addr) &&
+              (this.data == rhs.data) &&
+              (this.op   == rhs.op  ));
    endfunction
 endclass

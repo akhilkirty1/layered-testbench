@@ -3,7 +3,6 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    i2cmb_scoreboard scbd;
    i2cmb_generator  gen;
    i2cmb_env_configuration cfg;
-   i2c_data_array prediction_data[$];
    i2c_transaction prediction;
 
    // MOVE THESE TO COVERGROUP FOR PROJECT 4
@@ -11,7 +10,6 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    bit no_slave = 1'b0;
    bit no_ack = 1'b0;
    integer g_num_bus = 1;
-   bit data_sent = 0;
    bit address_sent = 0;
 
    csr_reg csr;
@@ -27,6 +25,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    //*****************************************************************
   function new(string name = "", ncsu_component parent = null); 
      super.new(name, parent);
+     prediction = new();
      reset_registers();
   endfunction 
 
@@ -180,8 +179,10 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
    //*****************************************************************
    function void run_byte_level_command();
       i2c_transaction tmp_pred;
+      
       // break if not enabled
       if (!csr.en) return;
+      
       // clear status bits
       cmdr.don = 0;
       cmdr.nak = 0;
@@ -194,28 +195,32 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
       // run command
       case (curr_state)
          IDLE: begin
+            
             csr.bc = 0;
-            data_sent = 0;
             address_sent = 0;
+
+            // handle commands
             case (cmdr.cmd)
-               START:  begin 
-                  // Return arbitration lost if needed
+              
+               START:  begin
+                  // return arbitration lost if needed
                   if (lose_arbitration) begin
                      cmdr.al = 1;
-                   end else begin
-                     // Else return done and capture bus
+                  end
+                  
+                  // else return done and capture bus
+                  else begin
                      cmdr.don = 1;
                      curr_state = BUS_TAKEN;
-                   end
+                  end
                end
 
                SET_BUS: 
                   // Return error if bus doesn't exist
-                  if (dpr.data > (g_num_bus - 1)) begin 
-                     cmdr.err = 1; 
-                  end else begin
-                     // Else return done and update bid
-                     prediction = new;
+                  if (dpr.data > (g_num_bus - 1)) cmdr.err = 1; 
+                  
+                  // Else return done and update bid
+                  else begin
                      csr.bid = dpr.data; 
                      cmdr.don = 1; 
                   end
@@ -229,38 +234,37 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
          end
 
          BUS_TAKEN: begin
+
+            // declare that the bus was captured
             csr.bc = 1;
+
+            // handle commands
             case (cmdr.cmd)
-               START:  begin 
-                  if (lose_arbitration) begin 
-                     cmdr.al = 1;
-                  end else if (data_sent) begin 
-                     scbd.nb_transport(prediction, tmp_pred);
-                  end else cmdr.don = 1;
-                  data_sent = 0;
+              
+               START:  begin
+                  if (lose_arbitration) cmdr.al = 1;
+                  else cmdr.don = 1;
+                  
+                  // reset flags
                   address_sent = 0;
                end
                
                STOP: begin
-                  cmdr.don = 1;
                   curr_state = IDLE;
-                  if (address_sent && data_sent) 
-                     scbd.nb_transport(prediction, tmp_pred);
-                  address_sent = 0;
-                  data_sent = 0;
+                  cmdr.don = 1;
                end
                  
                WRITE: begin
-                  prediction.op_type = i2c_pkg::WRITE;
+                  prediction.op = i2c_pkg::WRITE;
                   if (lose_arbitration) begin
                      cmdr.al = 1;
                      curr_state = IDLE;
                   end else if (address_sent && !no_ack) begin
+                     prediction.data = dpr.data;
+                     scbd.nb_transport(prediction, tmp_pred);
                      cmdr.don = 1;
-                     data_sent = 1;
-                     prediction.data.push_back(dpr.data);
                   end else if (!address_sent && !no_slave) begin
-                     prediction.address = dpr.data[I2C_ADDR_WIDTH-1:1];
+                     prediction.addr = dpr.data[I2C_ADDR_WIDTH:1];
                      address_sent = 1;
                      cmdr.don = 1;
                   end else begin 
@@ -270,15 +274,12 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                end
 
                READ_WITH_ACK: begin
-                  prediction.op_type = i2c_pkg::READ;
+                  prediction.op = i2c_pkg::READ;
                   if (lose_arbitration) begin
                      cmdr.al = 1;
                      curr_state = IDLE;
                   end else if (address_sent && !no_ack) begin
-                     data_sent = 1;
-                     cmdr.don = 1;
                      prediction.data = gen.provide_data;
-                     
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;
@@ -286,14 +287,12 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                end
 
                READ_WITH_NAK: begin
-                  prediction.op_type = i2c_pkg::READ;
+                  prediction.op = i2c_pkg::READ;
                   if (lose_arbitration) begin
                      cmdr.al = 1;
                      curr_state = IDLE;
                   end else if (address_sent) begin
-                     cmdr.don = 1;
-                     data_sent = 1;
-                     prediction.data = prediction_data.pop_front();
+                     prediction.data = gen.provide_data;
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;
