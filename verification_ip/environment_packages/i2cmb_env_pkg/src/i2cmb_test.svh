@@ -240,25 +240,20 @@ class i2cmb_test extends ncsu_component;
    // RANDOM TEST
    //***********************************************************
    task i2c_random_test;
-      $display("");
-      $display("#===================================================");
-      $display("#===================================================");
-      $display("#                 Running Random Test               ");
-      $display("#===================================================");
-      $display("#===================================================");
-      
       // Send and verify 10,000 random i2c transactions
       // using the wb interface
-      for (int i = 0; i < 10000; i++) begin
-         
+      for (int i = 1; i <= 100; i++) begin
          // Choose a random i2c operation to test
          i2c_op_t rand_op = i2c_op_t'($urandom_range(0, 1));
 
          // Send i2c command
+         $display("");
+         $display("Transaction %3d/100", i);
          case (rand_op)
             i2c_pkg::READ:  gen.read();
             i2c_pkg::WRITE: gen.write();
          endcase
+         $display("");
       end
    endtask
 

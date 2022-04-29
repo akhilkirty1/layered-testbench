@@ -16,12 +16,10 @@ class i2c_transaction extends ncsu_transaction;
    // CONVERT TO STRING
    //****************************************************************
    virtual function string convert2string();
-      return {
-         super.convert2string(), 
-         $sformatf("Address:0x%x Data:0x%x Type: %s",
-                   this.addr,
-                   this.data,
-                   this.op.name)};
+      return $sformatf("Address:0x%x Data:0x%x Type: %s",
+                       this.addr,
+                       this.data,
+                       this.op.name);
    endfunction
    
    //****************************************************************

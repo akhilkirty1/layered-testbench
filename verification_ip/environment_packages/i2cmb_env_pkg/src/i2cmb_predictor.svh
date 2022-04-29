@@ -279,7 +279,8 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                      cmdr.al = 1;
                      curr_state = IDLE;
                   end else if (address_sent && !no_ack) begin
-                     prediction.data = gen.provide_data;
+                     prediction.data = gen.p1_agent.driver.provide_data;
+                     scbd.nb_transport(prediction, tmp_pred);
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;
@@ -292,7 +293,8 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                      cmdr.al = 1;
                      curr_state = IDLE;
                   end else if (address_sent) begin
-                     prediction.data = gen.provide_data;
+                     prediction.data = gen.p1_agent.driver.provide_data;
+                     scbd.nb_transport(prediction, tmp_pred);
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;

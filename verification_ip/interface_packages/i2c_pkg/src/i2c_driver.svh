@@ -1,8 +1,8 @@
 class i2c_driver extends ncsu_component#(.T(i2c_transaction));
    
    i2c_configuration cfg;
-   i2c_transaction   i2c_trans;
    virtual i2c_if    bus;
+   i2c_data provide_data;
 
    //****************************************************************
    // CONSTRUCTOR
@@ -28,8 +28,7 @@ class i2c_driver extends ncsu_component#(.T(i2c_transaction));
 
          // If it was a read, provide read data
          if (trans.op == i2c_pkg::READ) begin
-            // trans.data = gen.provide_data;
-            bus.send_read_data(0);
+            bus.send_read_data(provide_data);
          end
       end
    endtask

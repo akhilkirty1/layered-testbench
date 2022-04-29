@@ -2,7 +2,6 @@ class i2cmb_generator extends ncsu_component;
    
    wb_agent  p0_agent;
    i2c_agent p1_agent;
-   i2c_data  provide_data;
    i2cmb_env_configuration cfg;
 
    //*****************************************************************
@@ -89,7 +88,7 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    task read();
       // Provide random read data
-      provide_data = $urandom();
+      p1_agent.driver.provide_data = $urandom();
       
       // Send read transaction
       set_bus();

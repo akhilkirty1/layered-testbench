@@ -15,9 +15,11 @@ class i2cmb_scoreboard extends ncsu_component#(.T(i2c_transaction));
    //*****************************************************************
    // Used as a second nb_put
    virtual function void nb_transport(input T input_trans, output T output_trans);
-      $display({get_full_name(),
-                " nb_transport: expected transaction ",
-                input_trans.convert2string()});
+      
+      // Log predicted transaction
+      $display({"Predicted:\t", input_trans.convert2string()});
+      
+      // Save transaction
       this.trans_in = new input_trans;
       output_trans = trans_out;
    endfunction
@@ -28,36 +30,11 @@ class i2cmb_scoreboard extends ncsu_component#(.T(i2c_transaction));
    virtual function void nb_put(T trans);
 
       // Log found transaction
-      $display({get_full_name(),
-                " nb_put: actual transaction ",
-                trans.convert2string()});
+      $display({"Actual:\t", trans.convert2string()});
   
       // Verify that predicted response matches actual response
       assert_correct_i2c_trans: 
-         assert (this.trans_in.compare(trans))
-         else begin // Error if not a correct match
-            $display({get_full_name(), " transaction MISMATCH!"}); 
-            $finish; 
-         end;
-
-        // Tell user that that the transaction was a match
-        $display({get_full_name(),   " transaction MATCH!"});
+         assert (this.trans_in.compare(trans)) $display("MATCH!");
+         else $error("MISMATCH!"); 
    endfunction
-   
-   //*****************************************************************
-   // BLOCKING PUT
-   //*****************************************************************
-   virtual task bl_put(T trans);
-       $display({get_full_name(),
-                 " nb_put: actual transaction ",
-                 trans.convert2string()});
-
-       // Check if the predicted transaction was correct
-       if (this.trans_in.compare(trans)) 
-          $display({get_full_name()," i2c_transaction MATCH!"});
-       else begin 
-          $display({get_full_name()," i2c_transaction MISMATCH!"}); 
-          $finish; 
-       end
-    endtask
 endclass
