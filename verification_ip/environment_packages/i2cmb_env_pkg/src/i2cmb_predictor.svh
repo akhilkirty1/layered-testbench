@@ -262,6 +262,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                   end else if (address_sent && !no_ack) begin
                      prediction.data = dpr.data;
                      scbd.nb_transport(prediction, tmp_pred);
+                     address_sent = 0;
                      cmdr.don = 1;
                   end else if (!address_sent && !no_slave) begin
                      prediction.addr = dpr.data[I2C_ADDR_WIDTH:1];
@@ -281,6 +282,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                   end else if (address_sent && !no_ack) begin
                      prediction.data = gen.p1_agent.driver.provide_data;
                      scbd.nb_transport(prediction, tmp_pred);
+                     address_sent = 0;
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;
@@ -295,6 +297,7 @@ class i2cmb_predictor extends ncsu_component #(.T(wb_transaction));
                   end else if (address_sent) begin
                      prediction.data = gen.p1_agent.driver.provide_data;
                      scbd.nb_transport(prediction, tmp_pred);
+                     address_sent = 0;
                   end else begin 
                      cmdr.err = 1;
                      curr_state = IDLE;

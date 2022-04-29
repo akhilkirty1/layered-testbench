@@ -1,6 +1,6 @@
 class i2c_configuration extends ncsu_configuration;
    
-   bit log_monitor = 1'b0;
+   const bit log_monitor = 1'b0;
    
    bit send_ack         = 1'b1;
    bit lose_arbitration = 1'b0;

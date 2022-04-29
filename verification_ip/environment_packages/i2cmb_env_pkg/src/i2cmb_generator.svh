@@ -3,6 +3,8 @@ class i2cmb_generator extends ncsu_component;
    wb_agent  p0_agent;
    i2c_agent p1_agent;
    i2cmb_env_configuration cfg;
+   
+   bit bus_never_set = 1'b1;
 
    //*****************************************************************
    // CONSTRUCTOR
@@ -47,15 +49,8 @@ class i2cmb_generator extends ncsu_component;
    // ENABLE I2CMB
    //*****************************************************************
    task enable();
-      if (cfg.log_tests) begin
-         $display("");
-         $display("#===================================================");
-         $display("#===================================================");
-         $display("#                   Enabling I2CMB                  ");
-         $display("#===================================================");
-         $display("#===================================================");
-      end
-      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, {1'b1, cfg.enable_irq, 6'b0});
+      bit irq_en = cfg.wb_config.enable_irq;
+      p0_agent.bl_create_put(CSR, wb_pkg::WRITE, {1'b1, irq_en, 6'b0});
    endtask
    
    //*****************************************************************
@@ -102,31 +97,40 @@ class i2cmb_generator extends ncsu_component;
    // SET BUS
    //*****************************************************************
    task set_bus();
-      // Use a random i2c bus
-      wb_data bus_id = $urandom_range(I2C_NUM_BUSSES-1);
+      if (!cfg.dont_stop || bus_never_set) begin
+         
+         // Use a random i2c bus
+         wb_data bus_id = $urandom_range(I2C_NUM_BUSSES-1);
+         
+         if (cfg.log_commands) $display("#### Setting the Bus");
 
-      if (cfg.log_commands) $display("#### Setting the Bus");
-
-      // Write bus_id to the DPR
-      if (cfg.log_commands) $display("# Writing busid to dpr");
-      p0_agent.bl_create_put(DPR, wb_pkg::WRITE, bus_id);
+         // Write bus_id to the DPR
+         if (cfg.log_commands) $display("# Writing busid to dpr");
+         p0_agent.bl_create_put(DPR, wb_pkg::WRITE, bus_id);
    
-      // Write byte "xxxxx110" to the CMDR
-      // This is "Set Bus" command
-      if (cfg.log_commands) $display("# Running set bus command");
-      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b110);
+         // Write byte "xxxxx110" to the CMDR
+         // This is "Set Bus" command
+         if (cfg.log_commands) $display("# Running set bus command");
+         p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b110);
+      end
    endtask
 
    //*****************************************************************
    // CAPTURE BUS
    //*****************************************************************
    task capture_bus();
-      if (cfg.log_commands) $display("### Capturing Bus");
-
-      // Write byte "xxxxx100" to the CMDR 
-      // This is the "Start" command
-      if (cfg.log_commands) $display("# Running start command");
-      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b100);
+      if (!cfg.dont_stop || bus_never_set) begin
+         
+         // Update bus_never_set
+         bus_never_set = 1'b0;
+         
+         if (cfg.log_commands) $display("### Capturing Bus");
+         
+         // Write byte "xxxxx100" to the CMDR 
+         // This is the "Start" command
+         if (cfg.log_commands) $display("# Running start command");
+         p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b100);
+      end
    endtask
 
    //*****************************************************************
@@ -212,11 +216,13 @@ class i2cmb_generator extends ncsu_component;
    // FREE SELECTED BUS
    //*****************************************************************
    task free_bus();
-      if (cfg.log_commands) $display("### Freeing Bus");
-
-      // Write byte "xxxxx101" to the CMDR. 
-      // This is "Stop" command
-      if (cfg.log_commands) $display("# Running stop command");
-      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b101);
+      if (!cfg.dont_stop) begin
+         if (cfg.log_commands) $display("### Freeing Bus");
+         
+         // Write byte "xxxxx101" to the CMDR. 
+         // This is "Stop" command
+         if (cfg.log_commands) $display("# Running stop command");
+         p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b101);
+      end
    endtask
 endclass

@@ -1,7 +1,9 @@
 export ECE745_PROJECT_HOME ?= $(PWD)/../../..
 export VLOG ?= vlog +incdir+$(ECE745_PROJECT_HOME)/verification_ip/ncsu_pkg
 
-TEST_TYPE ?= i2c_random_test
+#TEST_TYPE ?= i2c_rep_start_test
+#TEST_TYPE ?= i2c_test
+TEST_TYPE ?= reg_reset_test
 TEST_SEED ?= 12345
 
 include $(ECE745_PROJECT_HOME)/verification_ip/interface_packages/wb_pkg/Makefile

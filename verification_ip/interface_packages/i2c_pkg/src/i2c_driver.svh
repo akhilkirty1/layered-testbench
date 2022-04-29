@@ -22,14 +22,12 @@ class i2c_driver extends ncsu_component#(.T(i2c_transaction));
    // BLOCKING PUT
    //****************************************************************
    virtual task bl_put(T trans);
-      if (trans == null) begin
-         // Wait for an I2C Transaction
-         bus.capture_transfer(trans);
+      // Wait for an I2C Transaction
+      bus.capture_transfer(trans);
 
-         // If it was a read, provide read data
-         if (trans.op == i2c_pkg::READ) begin
-            bus.send_read_data(provide_data);
-         end
+      // If it was a read, provide read data
+      if (trans.op == i2c_pkg::READ) begin
+         bus.send_read_data(provide_data);
       end
    endtask
 endclass

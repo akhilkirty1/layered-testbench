@@ -37,12 +37,12 @@ class i2cmb_environment extends ncsu_component;
 
       // WB agent
       p0_agent = new("p0_agent");
-      p0_agent.set_configuration(cfg.p0_agent_config);
+      p0_agent.set_configuration(cfg.wb_config);
       p0_agent.build();
 
       // I2C agent
       p1_agent = new("p1_agent");
-      p1_agent.set_configuration(cfg.p1_agent_config);
+      p1_agent.set_configuration(cfg.i2c_config);
       p1_agent.build();
 
       // Predictor 

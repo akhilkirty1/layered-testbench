@@ -55,7 +55,7 @@ class i2cmb_test extends ncsu_component;
       case (test_type)
          "i2c_test":            i2c_test();
          "i2c_rep_start_test":  i2c_rep_start_test();
-         "i2c_random_test":     i2c_random_test();
+         "reg_reset_test":      reg_reset_test();
          "reg_access_test":     reg_access_test();
          "clock_sync_test":     clock_sync_test();
          default: begin
@@ -63,183 +63,41 @@ class i2cmb_test extends ncsu_component;
             $fatal;
          end
       endcase
-   endtask
-
-   //************************************************************
-   // I2C TEST
-   //************************************************************
-   // Test basic i2c functionality
-   task i2c_test();
-      #1000 write_test();
-      #1000 read_with_ack_test();
-      #1000 read_with_nack_test();
-      #1000 read_write_test();
-   endtask
-   
-   // Write 32 values to the i2c_bus
-   task write_test();
-    if (cfg.log_tests) begin
-       $display("");
-       $display("#===================================================");
-       $display("#===================================================");
-       $display("#                 Running Write Test                ");
-       $display("#===================================================");
-       $display("#===================================================");
-    end
-
-    for (int i = 0; i <= 32; i++) begin
-      if (cfg.log_sub_tests) begin
-         $display("");
-         $display("#---------------------------------------------------");
-         $display("#                   Write %2d/32                    ", i);
-         $display("#---------------------------------------------------");
-      end
-      gen.write();
-    end
-   endtask
-
-   // Read 32 values from the i2c_bus
-   task read_with_ack_test();
-      if (cfg.log_tests) begin
-         $display("");
-         $display("#===================================================");
-         $display("#===================================================");
-         $display("#                 Running Read Test                 ");
-         $display("#===================================================");
-         $display("#===================================================");
-      end
-
-      for (int i = 1; i <= 32; i++) begin 
-         if (cfg.log_sub_tests) begin
-            $display("");
-            $display("#---------------------------------------------------");
-            $display("#                    Reading %2d/32                 ", i);
-            $display("#---------------------------------------------------");
-         end
-         gen.read();
-      end
-   endtask
-   
-   // Read 32 values from the i2c_bus (return incrementing data from 100 to 131)
-   task read_with_nack_test;
-      if (cfg.log_tests) begin
-         $display("");
-         $display("#===================================================");
-         $display("#===================================================");
-         $display("#                 Running Read Test                 ");
-         $display("#===================================================");
-         $display("#===================================================");
-      end
-
-      for (integer i = 100; i < 132; i++) begin 
-         if (cfg.log_sub_tests) begin
-            $display("");
-            $display("#---------------------------------------------------");
-            $display("#                     Reading %2d                   ", i);
-            $display("#---------------------------------------------------");
-         end
-         gen.read();
-      end
-   endtask
-
-   // Alternate writes and reads for 64 transfers 
-   task read_write_test;
-       if (cfg.log_tests) begin
-          $display("");
-          $display("#===================================================");
-          $display("#===================================================");
-          $display("#              Running Read/Write Test              ");
-          $display("#===================================================");
-          $display("#===================================================");
-       end
-
-       for (int i = 1; i <= 64; i++) begin
-          // Write to I2C Bus
-          if (cfg.log_sub_tests) begin
-             $display("");
-             $display("#---------------------------------------------------");
-             $display("#                    Write %2d/64                   ", i);
-             $display("#---------------------------------------------------");
-          end
-          gen.write();
-
-          // Read from I2C Bus
-          if (cfg.log_sub_tests) begin
-             $display("");
-             $display("#---------------------------------------------------");
-             $display("#                    Reading %2d                    ", i);
-             $display("#---------------------------------------------------");
-          end
-          gen.read();
-       end
+      $display("");
+      $display("Test Finished Successfully");
+      $display("");
    endtask
 
    //***********************************************************
    // I2C REP START TEST
    //***********************************************************
    // Test basic i2c functionality using repeated starts
-   task i2c_rep_start_test;
-      #1000 rep_write_test();
-      #1000 rep_read_with_ack_test();
-      #1000 rep_read_with_nack_test();
-   endtask
+   task i2c_rep_start_test();
 
-   // Write 32 values to the i2c_bus
-   task rep_write_test();
-    if (cfg.log_tests) begin
-       $display("");
-       $display("#===================================================");
-       $display("#===================================================");
-       $display("#                 Running Write Test                ");
-       $display("#===================================================");
-       $display("#===================================================");
-    end
+      // Tell the system to not use the stop command
+      cfg.dont_stop = 1'b1;
+      
+      // Send and verify 10,000 random i2c transactions
+      // using the wb interface
+      for (int i = 1; i <= 100; i++) begin
+         // Choose a random i2c operation to test
+         i2c_op_t rand_op = i2c_op_t'($urandom_range(0, 1));
 
-    for (int i = 1; i <= 32; i++) begin
-      if (cfg.log_sub_tests) begin
+         // Send i2c command
          $display("");
-         $display("#----------------------------------------------------");
-         $display("#                     Write %2d/32                   ", i);
-         $display("#----------------------------------------------------");
-      end
-      gen.write();
-    end
-   endtask
-
-   // Read 32 values from the i2c_bus (return incrementing data from 100 to 131)
-   task rep_read_with_ack_test();
-      i2c_data_array data;
-      for (integer i = 100; i < 132; i++) data.push_back(i);
-      if (cfg.log_tests) begin
+         $display("Transaction %3d/100", i);
+         case (rand_op)
+            i2c_pkg::READ:  gen.read();
+            i2c_pkg::WRITE: gen.write();
+         endcase
          $display("");
-         $display("#===================================================");
-         $display("#===================================================");
-         $display("#                 Running Read Test                 ");
-         $display("#===================================================");
-         $display("#===================================================");
       end
-      //gen.rep_read_with_ack(32);
-   endtask
-
-   // Read 32 values from the i2c_bus (return incrementing data from 100 to 131)
-   task rep_read_with_nack_test();
-      i2c_data_array data;
-      for (integer i = 100; i < 132; i++) data.push_back(i);
-      if (cfg.log_tests) begin
-         $display("");
-         $display("#===================================================");
-         $display("#===================================================");
-         $display("#                 Running Read Test                 ");
-         $display("#===================================================");
-         $display("#===================================================");
-      end
-      //gen.rep_read_with_nack(32);
    endtask
 
    //***********************************************************
    // RANDOM TEST
    //***********************************************************
-   task i2c_random_test;
+   task i2c_test();
       // Send and verify 10,000 random i2c transactions
       // using the wb interface
       for (int i = 1; i <= 100; i++) begin
@@ -261,7 +119,7 @@ class i2cmb_test extends ncsu_component;
    // REG RESET TEST
    //***********************************************************
    // Test the reset values of I2CMB registers
-   task reg_reset_test;
+   task reg_reset_test();
 
       // Declarations
       i2cmb_reg curr_reg;
@@ -278,21 +136,32 @@ class i2cmb_test extends ncsu_component;
       // Loop through registers and verify that each is correct
       curr_reg = curr_reg.first;
       do begin
+
          // Send a command to read the register
          wb_data data = 0;
          gen.p0_agent.bl_create_put(curr_reg, wb_pkg::READ, data);
         
-         // Verify that predicted register values are equal to actual values 
+         // Log which register is being tested
+         $display("");
+         $display("Testing %s...", curr_reg.name);
+
+         // Get predicted and actual values
          pred_val = env.pred.read_reg(curr_reg);
          acc_val  = gen.p0_agent.monitor.monitored_read_data;
+         
+         // Log predicted and actual values
+         $display("Expected: %b", pred_val);
+         $display("Actual:   %b", acc_val);
+         
+         // Verify that predicted register values are equal to actual values 
          assert (acc_val == pred_val)
-         else begin 
-            $display("%s was incorrectly reset", curr_reg.name);
-            $display("Expected: %b", pred_val);
-            $display("Actual: %b", acc_val);
-            $finish;
-         end
+         else $error("%s was incorrectly reset", curr_reg.name);
+         $display("%s was correctly reset", curr_reg.name);
+         $display("");
+
+         // Advance to next register
          curr_reg = curr_reg.next;
+         
       end
       while (curr_reg != curr_reg.first);
    endtask
@@ -301,7 +170,7 @@ class i2cmb_test extends ncsu_component;
    // REG ACCESS TEST
    //***********************************************************
    // Test the access permissions of I2CMB registers
-   task reg_access_test;
+   task reg_access_test();
 
       // Declarations
       i2cmb_reg curr_reg;
@@ -332,7 +201,7 @@ class i2cmb_test extends ncsu_component;
    // CLOCK SYNC TEST
    //***********************************************************
    // Test Multi-Master Clock Synchronization
-   task clock_sync_test;
+   task clock_sync_test();
       $display("");
       $display("#===================================================");
       $display("#===================================================");

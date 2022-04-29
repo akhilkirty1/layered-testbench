@@ -108,6 +108,7 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
          bl_put(ret_trans);
 
          // Verify Response
+         $display("RESPONSE: %b", ret_trans.data);
          if (!ret_trans.data[7]) begin $display("WB Command Failed"); $finish; end
       end
       #3000;
