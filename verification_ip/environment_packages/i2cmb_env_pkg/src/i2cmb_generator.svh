@@ -225,4 +225,21 @@ class i2cmb_generator extends ncsu_component;
          p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b101);
       end
    endtask
+   
+   //*****************************************************************
+   // WAIT
+   //*****************************************************************
+   task wait_cmd(wb_data time_to_wait);
+      
+      // Write time to wait in ms to the DPR
+      if (cfg.log_commands) $display("# Writing wait time to dpr");
+      p0_agent.bl_create_put(DPR, wb_pkg::WRITE, time_to_wait);
+      
+      // Write time to wait in ms to the DPR
+      if (cfg.log_commands) $display("# Sending wait command");
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, WAIT);
+
+      // Wait for interrupt
+      p0_agent.driver.bus.wait_for_interrupt();
+   endtask
 endclass

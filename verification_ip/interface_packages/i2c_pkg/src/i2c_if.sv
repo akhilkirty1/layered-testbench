@@ -3,7 +3,7 @@
 import i2c_pkg::*;
 
 interface i2c_if(inout triand sda, inout triand scl);
-
+   
    reg sda_o = 1'b1;
    reg scl_o = 1'b1;
    reg sda_i = 1'b1;
@@ -26,7 +26,7 @@ interface i2c_if(inout triand sda, inout triand scl);
       read_data(trans.data);
       skip_ack();
    endtask
-
+   
    // ****************************************************************************
    // CAPTURES TRANSACTION
    // ****************************************************************************
@@ -65,7 +65,6 @@ interface i2c_if(inout triand sda, inout triand scl);
       @(posedge scl_i);
       @(negedge scl_i);
    endtask
-      
    
    task skip_ack();
       @(posedge scl_i);

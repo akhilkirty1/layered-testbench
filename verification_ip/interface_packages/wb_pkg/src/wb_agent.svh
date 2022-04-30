@@ -85,32 +85,40 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
       bl_put(trans);
 
       // Handle I2CMB Commands
-      if (trans.address == CMDR && trans.op_type == WRITE) begin
+      if (cfg.wait_for_comp) begin
+         if (trans.address == CMDR && trans.op_type == WRITE) begin
 
-         // Create a place to hold command response
-         ret_trans.address = CMDR;
-         ret_trans.op_type = wb_pkg::READ;
-         
-         // Wait 3000ns for the command to finish
-         if (cfg.enable_irq) bus.wait_for_interrupt();
-         
-         // Verify that IRQ is high if enabled
-         if (cfg.enable_irq) assert_irq_predicted: 
-            assert (driver.bus.irq_i);
-            else begin $display("Error: IRQ Low after Command"); $finish; end
-         
-         // Verify that the IRQ line is held low if it is disabled
-         assert_irq_low_if_disabled:
-            assert (cfg.enable_irq || (driver.bus.irq_i == 1'b0))
-            else begin $display("Error: IRQ High when Disabled"); $finish; end
-         
-         // Read CMDR for response
-         bl_put(ret_trans);
+            // Create a place to hold command response
+            ret_trans.address = CMDR;
+            ret_trans.op_type = wb_pkg::READ;
+            
+            // Wait 3000ns for the command to finish
+            if (cfg.enable_irq) bus.wait_for_interrupt();
+            
+            // Verify that IRQ is high if enabled
+            if (cfg.enable_irq) assert_irq_predicted: 
+               assert (driver.bus.irq_i);
+               else begin $display("Error: IRQ Low after Command"); $finish; end
+            
+            // Verify that the IRQ line is held low if it is disabled
+            assert_irq_low_if_disabled:
+               assert (cfg.enable_irq || (driver.bus.irq_i == 1'b0))
+               else begin $display("Error: IRQ High when Disabled"); $finish; end
+            
+            // Read CMDR for response
+            bl_put(ret_trans);
 
-         // Verify Response
-         $display("RESPONSE: %b", ret_trans.data);
-         if (!ret_trans.data[7]) begin $display("WB Command Failed"); $finish; end
+            // Verify Response
+            assert_correct_response: 
+               assert (ret_trans.data[7]
+                       || (cfg.lose_arbitration && ret_trans.data[5]))
+                 else $fatal(1, "WB Command Failed: %b", ret_trans.data);
+
+            assert_valid_response:
+              assert (^ret_trans.data[7:4])
+                 else $fatal(1, "Invalid Response: %b", ret_trans.data);
+         end
+         #3000;
       end
-      #3000;
    endtask
 endclass

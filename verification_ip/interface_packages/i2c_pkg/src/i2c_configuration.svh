@@ -3,7 +3,6 @@ class i2c_configuration extends ncsu_configuration;
    const bit log_monitor = 1'b0;
    
    bit send_ack         = 1'b1;
-   bit lose_arbitration = 1'b0;
    int stretch_time     = 1'b0;
    bit read_with_nack   = 1'b0;
    

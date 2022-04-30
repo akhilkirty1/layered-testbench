@@ -46,12 +46,13 @@ class i2cmb_environment extends ncsu_component;
       p1_agent.build();
 
       // Predictor 
-      pred  = new("pred");
+      pred = new("pred");
       pred.set_configuration(cfg);
       pred.build();
       
       // Scoreboard 
-      scbd  = new("scbd");
+      scbd = new("scbd");
+      scbd.set_configuration(cfg);
       scbd.build();
       
       // Set Predictor and Scoreboard

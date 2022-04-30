@@ -1,9 +1,16 @@
 export ECE745_PROJECT_HOME ?= $(PWD)/../../..
 export VLOG ?= vlog +incdir+$(ECE745_PROJECT_HOME)/verification_ip/ncsu_pkg
 
+#TEST_TYPE ?= i2c_write_test
+#TEST_TYPE ?= i2c_read_test
+#TEST_TYPE ?= reg_reset_test
+#TEST_TYPE ?= clock_sync_test
+#TEST_TYPE ?= wait_test
+#TEST_TYPE ?= reg_access_test
 #TEST_TYPE ?= i2c_rep_start_test
-#TEST_TYPE ?= i2c_test
-TEST_TYPE ?= reg_reset_test
+
+TEST_TYPE ?= arbitration_test
+
 TEST_SEED ?= 12345
 
 include $(ECE745_PROJECT_HOME)/verification_ip/interface_packages/wb_pkg/Makefile
@@ -41,7 +48,7 @@ run_cli:
 	vsim  -c -sv_seed $(TEST_SEED) -do "run -a; coverage attribute -name TESTNAME -value $(TEST_TYPE); coverage save $(TEST_TYPE).$(TEST_SEED).ucdb; quit -f" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
 
 run_gui:
-	vsim  -sv_seed $(TEST_SEED) -do "do wave.do;run -a" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
+	vsim  -DTESTNAME=HELLO -sv_seed $(TEST_SEED) -do "do wave.do;run -a" +TEST_TYPE=$(TEST_TYPE) optimized_debug_top_tb
 
 cli: compile run_cli
 

@@ -1,3 +1,11 @@
+localparam int G_F_SCL_0 = 50; // 50 kHz (20us)
+localparam int G_F_SCL_1 = 150;
+localparam int G_F_SCL_2 = 200;
+localparam int G_F_SCL_3 = 250;
+localparam int G_F_SCL_4 = 300;
+localparam int G_F_SCL_5 = 350;
+localparam int G_F_SCL_6 = 400;
+
 /// Registers
 typedef enum {
    CSR,

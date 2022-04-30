@@ -62,8 +62,17 @@ module top();
   i2c_if i2c_bus(.scl(scl[0]), .sda(sda[0]));
      
   
+`ifdef SYSTEM_CLOCK_SPEED_TEST
+   localparam NUM_IICMB = 16;
+`else
+   localparam NUM_IICMB = 2;
+`endif
+   
   // Instantiate the DUT - I2C Multi-Bus Controller
-  \work.iicmb_m_wb(str) #(.g_bus_num(I2C_NUM_BUSSES)) DUT
+  \work.iicmb_m_wb(str) #(
+                          .g_bus_num(I2C_NUM_BUSSES),
+                          .g_f_scl_0(G_F_SCL_0) // 100 KHz
+                          ) iicmbs[NUM_IICMB-1:0]
     (
       // -- Wishbone signals:
       .clk_i(clk),  // in    std_logic;       -- Clock
@@ -106,4 +115,5 @@ module top();
      #100 $finish();
 
   end
+
 endmodule

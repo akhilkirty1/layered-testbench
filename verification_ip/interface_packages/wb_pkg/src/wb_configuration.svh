@@ -5,7 +5,9 @@ class wb_configuration extends ncsu_configuration;
    const bit log_driver  = 1'b0;
 
    // Other Configuration
-   bit enable_irq = 1'b1;  // Enable the IRQ output of the IICMB
+   bit enable_irq    = 1'b1;    // Enable the IRQ output of the IICMB
+   bit wait_for_comp = 1'b1;    // Wait for command completion
+   bit lose_arbitration = 1'b0; // Should we lose arbitration
    
    //****************************************************************
    // CONSTRUCTOR
