@@ -63,6 +63,7 @@ class i2cmb_test extends ncsu_component;
          "clock_sync_test":     clock_sync_test();
          "arbitration_test":    arbitration_test();
          "wait_test":           wait_test();
+         "clock_stretch_test":  clock_stretch_test();
          default: $fatal(1, "Unknown Test Type");
       endcase
       $display("");
@@ -506,5 +507,23 @@ class i2cmb_test extends ncsu_component;
          $display("");
          
       end
+   endtask
+   
+   //***********************************************************
+   // CLOCK STRETCH TEST
+   //***********************************************************
+   task clock_stretch_test();
+      // Tell the I2C driver to stretch the clock
+      cfg.i2c_config.stretch = 1'b1;
+
+      // Send 50 writes to test clock stretching
+      for (int i = 1; i <= 50; i++) begin
+         $display("");
+         $display("Test %2d/50", i);
+         gen.read();
+         $display("SUCCESS");
+         $display("");
+      end
+      
    endtask
 endclass

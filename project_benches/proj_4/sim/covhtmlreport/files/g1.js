@@ -1,0 +1,2 @@
+var g_data = {"38":{"pr":"/wb_pkg","ty":2,"dui":5,"dun":"work.wb_pkg","cvgs":[{"h":["/wb_pkg/wb_monitor/wb_monitor_cg",1,1,39],"cov":[346,156,84.20],"opts":{"goal":"100","merge_instance":"auto(true)"}}]},"47":{"pr":"/i2c_pkg","ty":2,"dui":7,"dun":"work.i2c_pkg","cvgs":[{"h":["/i2c_pkg/i2c_monitor/i2c_monitor_cg",1,1,48],"cov":[388,370,97.39],"opts":{"goal":"100","merge_instance":"auto(true)"}}]}};
+processCovergroupsData(g_data);

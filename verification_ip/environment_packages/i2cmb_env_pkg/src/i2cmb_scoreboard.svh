@@ -15,7 +15,7 @@ class i2cmb_scoreboard extends ncsu_component#(.T(i2c_transaction));
    //*****************************************************************
    // SET CONFIGURATION
    //*****************************************************************
-   function set_configuration(i2cmb_env_configuration cfg);
+   function void set_configuration(i2cmb_env_configuration cfg);
       this.cfg = cfg;
    endfunction
    

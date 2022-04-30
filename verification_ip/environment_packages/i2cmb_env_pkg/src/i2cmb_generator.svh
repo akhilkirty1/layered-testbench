@@ -3,9 +3,8 @@ class i2cmb_generator extends ncsu_component;
    wb_agent  p0_agent;
    i2c_agent p1_agent;
    i2cmb_env_configuration cfg;
-   
    bit bus_never_set = 1'b1;
-
+   
    //*****************************************************************
    // CONSTRUCTOR
    //*****************************************************************
@@ -98,20 +97,24 @@ class i2cmb_generator extends ncsu_component;
    //*****************************************************************
    task set_bus();
       if (!cfg.dont_stop || bus_never_set) begin
-         
+
          // Use a random i2c bus
          wb_data bus_id = $urandom_range(I2C_NUM_BUSSES-1);
+        
+         // Flag that bus has been set
+         bus_never_set = 1'b0;
          
          if (cfg.log_commands) $display("#### Setting the Bus");
-
+         
          // Write bus_id to the DPR
          if (cfg.log_commands) $display("# Writing busid to dpr");
          p0_agent.bl_create_put(DPR, wb_pkg::WRITE, bus_id);
-   
+         
          // Write byte "xxxxx110" to the CMDR
          // This is "Set Bus" command
          if (cfg.log_commands) $display("# Running set bus command");
          p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b110);
+         
       end
    endtask
 
@@ -119,18 +122,14 @@ class i2cmb_generator extends ncsu_component;
    // CAPTURE BUS
    //*****************************************************************
    task capture_bus();
-      if (!cfg.dont_stop || bus_never_set) begin
-         
-         // Update bus_never_set
-         bus_never_set = 1'b0;
-         
-         if (cfg.log_commands) $display("### Capturing Bus");
-         
-         // Write byte "xxxxx100" to the CMDR 
-         // This is the "Start" command
-         if (cfg.log_commands) $display("# Running start command");
-         p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b100);
-      end
+      
+      if (cfg.log_commands) $display("### Capturing Bus");
+      
+      // Write byte "xxxxx100" to the CMDR 
+      // This is the "Start" command
+      if (cfg.log_commands) $display("# Running start command");
+      p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b100);
+      
    endtask
 
    //*****************************************************************
@@ -152,6 +151,7 @@ class i2cmb_generator extends ncsu_component;
       // This is the "Write" command
       if (cfg.log_commands) $display("# Running write command");
       p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b001);
+      
    endtask
 
    //*****************************************************************
@@ -173,6 +173,7 @@ class i2cmb_generator extends ncsu_component;
       // This is the "Write" command
       if (cfg.log_commands) $display("# Running write command");
       p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b001);
+      
    endtask
 
    //*****************************************************************
@@ -194,12 +195,14 @@ class i2cmb_generator extends ncsu_component;
       // This is "Write" command
       if (cfg.log_commands) $display("# Running write command");
       p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b001);
+      
    endtask
 
    //*****************************************************************
    // SEND READ COMMAND TO SLAVE ON I2C BUS
    //*****************************************************************
    task send_read();
+      
       if (cfg.log_commands) $display("### Sending Read");
       
       // Write read data to DPR
@@ -210,12 +213,14 @@ class i2cmb_generator extends ncsu_component;
       // This is "Read With Ack" command
       if (cfg.log_commands) $display("# Sending read command");
       p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b010);
+      
    endtask
 
    //*****************************************************************
    // FREE SELECTED BUS
    //*****************************************************************
    task free_bus();
+      
       if (!cfg.dont_stop) begin
          if (cfg.log_commands) $display("### Freeing Bus");
          
@@ -224,6 +229,7 @@ class i2cmb_generator extends ncsu_component;
          if (cfg.log_commands) $display("# Running stop command");
          p0_agent.bl_create_put(CMDR, wb_pkg::WRITE, 8'b101);
       end
+      
    endtask
    
    //*****************************************************************
@@ -241,5 +247,6 @@ class i2cmb_generator extends ncsu_component;
 
       // Wait for interrupt
       p0_agent.driver.bus.wait_for_interrupt();
+      
    endtask
 endclass

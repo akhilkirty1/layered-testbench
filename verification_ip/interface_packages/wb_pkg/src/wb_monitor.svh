@@ -6,8 +6,10 @@ class wb_monitor extends ncsu_component#(.T(wb_transaction));
    virtual wb_if       bus;
    
    covergroup wb_monitor_cg with function sample(wb_transaction trans);
-     reg_x_op:   cross trans.address, trans.op_type;
-     reg_x_data: cross trans.address, trans.data iff (trans.op_type == WRITE);
+      reg_x_op:   cross trans.address, trans.op_type;
+      reg_x_data: cross trans.address, trans.data iff (trans.op_type == WRITE);
+      cmd_ran:    coverpoint trans.data[2:0]
+         iff(trans.address == CMDR && trans.op_type == WRITE);
    endgroup
    
    //****************************************************************

@@ -116,7 +116,7 @@ class wb_agent extends ncsu_component#(.T(wb_transaction));
 
             assert_valid_response:
               assert (^ret_trans.data[7:4])
-                 else $fatal(1, "Invalid Response: %b", ret_trans.data);
+                else $fatal(1, "Invalid Response: %b", ret_trans.data);
          end
          #3000;
       end

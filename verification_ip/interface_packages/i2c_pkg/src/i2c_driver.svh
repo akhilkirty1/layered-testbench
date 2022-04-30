@@ -27,6 +27,14 @@ class i2c_driver extends ncsu_component#(.T(i2c_transaction));
 
       // If it was a read, provide read data
       if (trans.op == i2c_pkg::READ) begin
+         if (cfg.stretch) begin
+            // Hold SCL down
+            bus.scl_o = 1'b0;
+
+            // Release after 30us
+            #30us bus.scl_o = 1'b1;
+         end
+         
          bus.send_read_data(provide_data);
       end
    endtask
